@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Favourite | CampusConnect</title>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <table width="100%" cellpadding="10">
+                <tr>
+                    <td width="45%">
+                        <strong>CampusConnect</strong>
+                    </td>
+
+                    <td align="center">
+                        <a href="events.html">Explore Events</a>
+                    </td>
+
+                    <td align="center">
+                        <a href="my-favourite.html">My Interest</a>
+                    </td>
+
+                    <td align="center">
+                        <a href="student-dashboard.html">My Dashboard</a>
+                    </td>
+
+                    <td align="right">
+                        <a href="index.html" title="Log Out">
+                            👤
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Favourite Events -->
+        <section id="favourite-events">
+
+            <h1>My Favourite Events</h1>
+            <p>Events that you have saved</p>
+
+            <div id="favourite-list"></div>
+
+        </section>
+
+    </main>
+
+    <script>
+
+        // Display saved favourite events
+        function displayFavourites() {
+
+            const favourites = JSON.parse(
+                localStorage.getItem("favouriteEvents") || "[]"
+            );
+
+            const container =
+                document.getElementById("favourite-list");
+
+            container.innerHTML = "";
+
+            if (favourites.length === 0) {
+
+                container.innerHTML =
+                    "<p>No favourite events yet.</p>";
+
+                return;
+            }
+
+            favourites.forEach(function (event) {
+
+                container.innerHTML += `
+
+                <table border="1" width="100%"
+                    cellpadding="15" cellspacing="0">
+
+                    <tr>
+
+                        <td width="80%">
+
+                            <h3>${event.name}</h3>
+
+                            <p>
+                                ${event.date}
+                                &nbsp; | &nbsp;
+                                ${event.location}
+                            </p>
+
+                            <a href="event-details.html?id=${event.id}">
+                                View Details
+                            </a>
+
+                        </td>
+
+                        <td align="center">
+
+                            <button type="button"
+                                onclick="removeEvent(${event.id})">
+                                Remove
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <br>
+
+            `;
+
+            });
+        }
+
+        // Remove favourite event
+        function removeEvent(eventId) {
+
+            if (confirm("Are you sure you want to remove this event?")) {
+
+                let favourites = JSON.parse(
+                    localStorage.getItem("favouriteEvents") || "[]"
+                );
+
+                favourites = favourites.filter(
+                    event => event.id !== eventId
+                );
+
+                localStorage.setItem(
+                    "favouriteEvents",
+                    JSON.stringify(favourites)
+                );
+
+                displayFavourites();
+
+            }
+        }
+
+        displayFavourites();
+
+    </script>
+
+</body>
+
+</html>
