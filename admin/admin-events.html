@@ -15,7 +15,6 @@
     <hr />
 
     <h2>Monitor Published Events</h2>
-
     <h3>Event Overview</h3>
 
     <table border="1" cellspacing="0" cellpadding="10">
@@ -37,20 +36,20 @@
 
     <h3>Search Events</h3>
 
-    <form>
+    <form onsubmit="return searchEvents(event);">
       <table border="0" cellspacing="4" cellpadding="5">
         <tr>
           <td>Event Name:</td>
           <td>
             <input
               type="text"
-              name="searchEvent"
+              id="searchEvent"
               placeholder="Search event name"
             />
           </td>
           <td>Event Status:</td>
           <td>
-            <select name="eventStatus">
+            <select id="eventStatus">
               <option value="">All Status</option>
               <option value="Published">Published</option>
               <option value="Completed">Completed</option>
@@ -58,7 +57,8 @@
             </select>
           </td>
           <td>
-            <input type="button" value="Search" />
+            <input type="submit" value="Search" />
+            <input type="button" value="Reset" onclick="resetSearch()" />
           </td>
         </tr>
       </table>
@@ -78,8 +78,10 @@
         <th>Location</th>
         <th>Capacity</th>
         <th>Status</th>
+        <th>Action</th>
       </tr>
-      <tr>
+
+      <tr class="event-row">
         <td>1</td>
         <td>Leadership Seminar</td>
         <td>Seminar</td>
@@ -88,8 +90,12 @@
         <td>UiTM Shah Alam</td>
         <td>100</td>
         <td>Published</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
       </tr>
-      <tr>
+
+      <tr class="event-row">
         <td>2</td>
         <td>AI Workshop</td>
         <td>Workshop</td>
@@ -98,8 +104,12 @@
         <td>UiTM Shah Alam</td>
         <td>50</td>
         <td>Published</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
       </tr>
-      <tr>
+
+      <tr class="event-row">
         <td>3</td>
         <td>Career Talk</td>
         <td>Talk</td>
@@ -108,8 +118,12 @@
         <td>UiTM Shah Alam</td>
         <td>80</td>
         <td>Completed</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
       </tr>
-      <tr>
+
+      <tr class="event-row">
         <td>4</td>
         <td>Sports Carnival</td>
         <td>Sports</td>
@@ -118,8 +132,12 @@
         <td>UiTM Shah Alam</td>
         <td>200</td>
         <td>Cancelled</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
       </tr>
-      <tr>
+
+      <tr class="event-row">
         <td>5</td>
         <td>Entrepreneurship Forum</td>
         <td>Forum</td>
@@ -128,7 +146,71 @@
         <td>UiTM Shah Alam</td>
         <td>120</td>
         <td>Published</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
       </tr>
     </table>
+
+    <script>
+      function searchEvents(event) {
+        event.preventDefault();
+
+        var name = document.getElementById("searchEvent").value.toLowerCase();
+
+        var status = document.getElementById("eventStatus").value;
+
+        var rows = document.getElementsByClassName("event-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          var eventName = rows[i].cells[1].textContent.toLowerCase();
+
+          var eventStatus = rows[i].cells[7].textContent;
+
+          if (
+            eventName.includes(name) &&
+            (status == "" || eventStatus == status)
+          ) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+
+        return false;
+      }
+
+      function resetSearch() {
+        document.getElementById("searchEvent").value = "";
+        document.getElementById("eventStatus").value = "";
+
+        var rows = document.getElementsByClassName("event-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          rows[i].style.display = "";
+        }
+      }
+
+      function viewEvent(button) {
+        var row = button.closest("tr");
+
+        alert(
+          "Event: " +
+            row.cells[1].textContent +
+            "\nCategory: " +
+            row.cells[2].textContent +
+            "\nOrganizer: " +
+            row.cells[3].textContent +
+            "\nDate: " +
+            row.cells[4].textContent +
+            "\nLocation: " +
+            row.cells[5].textContent +
+            "\nCapacity: " +
+            row.cells[6].textContent +
+            "\nStatus: " +
+            row.cells[7].textContent,
+        );
+      }
+    </script>
   </body>
 </html>

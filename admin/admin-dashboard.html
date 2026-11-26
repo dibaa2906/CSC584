@@ -8,49 +8,54 @@
     <h1>CampusConnect</h1>
 
     <a href="admin-dashboard.html">Dashboard</a> |
-    <a href="manage-users.html">Manage System</a> |
-    <a href="manage-users.html">Organizer Access</a> |
+    <a href="manage-users.html">Manage Users</a> |
     <a href="admin-events.html">Monitor Events</a> |
     <a href="../index.html">Logout</a>
 
     <hr />
 
     <h2>Manage System</h2>
+    <h3>System Overview</h3>
 
-    <table border="1" cellspacing="4" cellpadding="10">
+    <table border="1" cellspacing="0" cellpadding="10">
       <tr>
         <th>Organizers</th>
         <th>Published Events</th>
-        <th>Pending Requests</th>
+        <th>Pending Access Requests</th>
       </tr>
       <tr>
         <td>2</td>
         <td>3</td>
-        <td>1</td>
+        <td id="pendingCount">1</td>
       </tr>
     </table>
 
     <br />
 
-    <form>
+    <h3>Search Organizer</h3>
+
+    <form onsubmit="return searchOrganizer(event);">
       <table border="0" cellspacing="4" cellpadding="5">
         <tr>
-          <td>Search Organizer:</td>
+          <td>Organizer Name:</td>
           <td>
             <input
               type="text"
-              name="searchName"
+              id="searchName"
               placeholder="Search organizer name"
             />
           </td>
           <td>
-            <input type="button" value="Search" />
+            <input type="submit" value="Search" />
+            <input type="button" value="Reset" onclick="resetSearch()" />
           </td>
         </tr>
       </table>
     </form>
 
     <br />
+
+    <h3>Organizer Information</h3>
 
     <table border="1" cellspacing="0" cellpadding="8">
       <tr>
@@ -59,27 +64,104 @@
         <th>Role</th>
         <th>Email Address</th>
         <th>Status</th>
-        <th>Action</th>
         <th>Access Request</th>
+        <th>Action</th>
       </tr>
-      <tr>
+
+      <tr class="organizer-row">
         <td>1</td>
         <td>Aisyah Nabila</td>
         <td>Organizer</td>
         <td>aisyah@example.com</td>
         <td>Active</td>
-        <td><input type="button" value="View" /></td>
-        <td>Pending</td>
+        <td id="access1">Pending</td>
+        <td>
+          <input type="button" value="View" onclick="viewOrganizer(1)" />
+        </td>
       </tr>
-      <tr>
+
+      <tr class="organizer-row">
         <td>2</td>
         <td>Wan Amirul</td>
         <td>Organizer</td>
         <td>amirul@example.com</td>
         <td>Active</td>
-        <td><input type="button" value="View" /></td>
-        <td>Granted</td>
+        <td id="access2">Granted</td>
+        <td>
+          <input type="button" value="View" onclick="viewOrganizer(2)" />
+        </td>
       </tr>
     </table>
+
+    <script>
+      function readStatus(id, originalStatus) {
+        try {
+          return (
+            localStorage.getItem("campusconnect_access_" + id) || originalStatus
+          );
+        } catch (error) {
+          return originalStatus;
+        }
+      }
+
+      function loadStatus() {
+        var status1 = readStatus(1, "Pending");
+        var status2 = readStatus(2, "Granted");
+
+        document.getElementById("access1").textContent = status1;
+
+        document.getElementById("access2").textContent = status2;
+
+        var count = 0;
+
+        if (status1 == "Pending") {
+          count++;
+        }
+
+        if (status2 == "Pending") {
+          count++;
+        }
+
+        document.getElementById("pendingCount").textContent = count;
+      }
+
+      function searchOrganizer(event) {
+        event.preventDefault();
+
+        var searchName = document
+          .getElementById("searchName")
+          .value.toLowerCase();
+
+        var rows = document.getElementsByClassName("organizer-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          var name = rows[i].cells[1].textContent.toLowerCase();
+
+          if (name.includes(searchName)) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+
+        return false;
+      }
+
+      function resetSearch() {
+        document.getElementById("searchName").value = "";
+
+        var rows = document.getElementsByClassName("organizer-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          rows[i].style.display = "";
+        }
+      }
+
+      function viewOrganizer(id) {
+        window.location.href = "manage-users.html?organizer=" + id;
+      }
+
+      loadStatus();
+    </script>
   </body>
 </html>

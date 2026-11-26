@@ -5,13 +5,14 @@
     <meta charset="UTF-8" />
   </head>
   <body>
-    <h1>LOGIN</h1>
+    <h1>CampusConnect</h1>
+    <h2>Login</h2>
     <p>SIGN IN TO YOUR ACCOUNT</p>
 
-    <form>
+    <form onsubmit="return loginDemo(event);">
       <table border="0" cellspacing="4" cellpadding="5">
         <tr>
-          <td colspan="2">
+          <td colspan="3">
             <b>Select User Type:</b>
           </td>
         </tr>
@@ -26,28 +27,31 @@
           </td>
         </tr>
         <tr>
+          <td>Email or Student ID:</td>
           <td colspan="2">
             <input
               type="text"
               name="loginId"
-              placeholder="Email or Student ID"
+              placeholder="Enter email or student ID"
               required
             />
           </td>
         </tr>
         <tr>
+          <td>Password:</td>
           <td colspan="2">
             <input
               type="password"
               name="password"
-              placeholder="Password"
+              placeholder="Enter password"
               required
             />
           </td>
         </tr>
         <tr>
+          <td></td>
           <td colspan="2">
-            <input type="button" value="Login" />
+            <input type="submit" value="Login" />
           </td>
         </tr>
       </table>
@@ -57,5 +61,23 @@
       Don't have an account?
       <a href="register.html">Register here</a>
     </p>
+
+    <script>
+      function loginDemo(event) {
+        event.preventDefault();
+
+        var role = document.querySelector('input[name="role"]:checked').value;
+
+        if (role == "student") {
+          window.location.href = "student/student-dashboard.html";
+        } else if (role == "organizer") {
+          window.location.href = "organizer/organizer-dashboard.html";
+        } else {
+          window.location.href = "admin/admin-dashboard.html";
+        }
+
+        return false;
+      }
+    </script>
   </body>
 </html>
