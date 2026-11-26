@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CampusConnect - Manage Organizer Access</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>CampusConnect</h1>
+
+    <a href="admin-dashboard.html">Dashboard</a> |
+    <a href="manage-users.html">Manage Users</a> |
+    <a href="admin-events.html">Monitor Events</a> |
+    <a href="../index.html">Logout</a>
+
+    <hr />
+
+    <h2>Manage Organizer Access</h2>
+
+    <form onsubmit="return searchOrganizer(event);">
+      <table border="0" cellspacing="4" cellpadding="5">
+        <tr>
+          <td>Search Organizer:</td>
+          <td>
+            <input
+              type="text"
+              id="searchName"
+              placeholder="Search organizer name"
+            />
+          </td>
+          <td>Club:</td>
+          <td>
+            <select id="club">
+              <option value="">All Clubs</option>
+              <option value="Kelab Kebudayaan">Kelab Kebudayaan</option>
+              <option value="MPP">MPP</option>
+            </select>
+          </td>
+          <td>
+            <input type="submit" value="Search" />
+            <input type="button" value="Reset" onclick="resetSearch()" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <br />
+
+    <h3>Organizer Information</h3>
+
+    <table border="1" cellspacing="0" cellpadding="8">
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Club Association</th>
+        <th>Access Status</th>
+        <th>Action</th>
+      </tr>
+
+      <tr class="organizer-row" data-id="1">
+        <td>1</td>
+        <td>Aisyah Nabila</td>
+        <td>aisyah@example.com</td>
+        <td>Kelab Kebudayaan</td>
+        <td id="status1">Pending</td>
+        <td>
+          <input
+            type="button"
+            value="Grant Access"
+            onclick="changeAccess(1, 'Granted')"
+          />
+
+          <input
+            type="button"
+            value="Revoke Access"
+            onclick="changeAccess(1, 'Revoked')"
+          />
+        </td>
+      </tr>
+
+      <tr class="organizer-row" data-id="2">
+        <td>2</td>
+        <td>Wan Amirul</td>
+        <td>amirul@example.com</td>
+        <td>MPP</td>
+        <td id="status2">Granted</td>
+        <td>
+          <input
+            type="button"
+            value="Grant Access"
+            onclick="changeAccess(2, 'Granted')"
+          />
+
+          <input
+            type="button"
+            value="Revoke Access"
+            onclick="changeAccess(2, 'Revoked')"
+          />
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      function readStatus(id, defaultValue) {
+        try {
+          return (
+            localStorage.getItem("campusconnect_access_" + id) || defaultValue
+          );
+        } catch (error) {
+          return defaultValue;
+        }
+      }
+
+      function saveStatus(id, newStatus) {
+        try {
+          localStorage.setItem("campusconnect_access_" + id, newStatus);
+        } catch (error) {
+          // Display still works without browser storage.
+        }
+      }
+
+      function changeAccess(id, newStatus) {
+        if (newStatus == "Revoked") {
+          var answer = confirm("Are you sure you want to revoke access?");
+
+          if (answer == false) {
+            return;
+          }
+        }
+
+        document.getElementById("status" + id).textContent = newStatus;
+
+        saveStatus(id, newStatus);
+
+        alert("Organizer access has been " + newStatus + " (Demo only).");
+      }
+
+      function searchOrganizer(event) {
+        event.preventDefault();
+
+        var name = document.getElementById("searchName").value.toLowerCase();
+
+        var club = document.getElementById("club").value;
+
+        var rows = document.getElementsByClassName("organizer-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          var organizerName = rows[i].cells[1].textContent.toLowerCase();
+
+          var organizerClub = rows[i].cells[3].textContent;
+
+          if (
+            organizerName.includes(name) &&
+            (club == "" || organizerClub == club)
+          ) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+
+        return false;
+      }
+
+      function resetSearch() {
+        document.getElementById("searchName").value = "";
+        document.getElementById("club").value = "";
+
+        var rows = document.getElementsByClassName("organizer-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          rows[i].style.display = "";
+        }
+
+        window.history.replaceState(null, "", "manage-users.html");
+      }
+
+      function loadPage() {
+        document.getElementById("status1").textContent = readStatus(
+          1,
+          "Pending",
+        );
+
+        document.getElementById("status2").textContent = readStatus(
+          2,
+          "Granted",
+        );
+
+        var selectedId = new URLSearchParams(window.location.search).get(
+          "organizer",
+        );
+
+        if (selectedId == "1" || selectedId == "2") {
+          var rows = document.getElementsByClassName("organizer-row");
+
+          for (var i = 0; i < rows.length; i++) {
+            if (rows[i].getAttribute("data-id") == selectedId) {
+              rows[i].style.display = "";
+            } else {
+              rows[i].style.display = "none";
+            }
+          }
+        }
+      }
+
+      loadPage();
+    </script>
+  </body>
+</html>

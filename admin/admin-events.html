@@ -1,0 +1,216 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CampusConnect - Monitor Events</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>CampusConnect</h1>
+
+    <a href="admin-dashboard.html">Dashboard</a> |
+    <a href="manage-users.html">Manage Users</a> |
+    <a href="admin-events.html">Monitor Events</a> |
+    <a href="../index.html">Logout</a>
+
+    <hr />
+
+    <h2>Monitor Published Events</h2>
+    <h3>Event Overview</h3>
+
+    <table border="1" cellspacing="0" cellpadding="10">
+      <tr>
+        <th>Total Events</th>
+        <th>Published Events</th>
+        <th>Completed Events</th>
+        <th>Cancelled Events</th>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>3</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </table>
+
+    <br />
+
+    <h3>Search Events</h3>
+
+    <form onsubmit="return searchEvents(event);">
+      <table border="0" cellspacing="4" cellpadding="5">
+        <tr>
+          <td>Event Name:</td>
+          <td>
+            <input
+              type="text"
+              id="searchEvent"
+              placeholder="Search event name"
+            />
+          </td>
+          <td>Event Status:</td>
+          <td>
+            <select id="eventStatus">
+              <option value="">All Status</option>
+              <option value="Published">Published</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </td>
+          <td>
+            <input type="submit" value="Search" />
+            <input type="button" value="Reset" onclick="resetSearch()" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <br />
+
+    <h3>Event List</h3>
+
+    <table border="1" cellspacing="0" cellpadding="8">
+      <tr>
+        <th>No.</th>
+        <th>Event Name</th>
+        <th>Category</th>
+        <th>Organizer</th>
+        <th>Event Date</th>
+        <th>Location</th>
+        <th>Capacity</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+
+      <tr class="event-row">
+        <td>1</td>
+        <td>Leadership Seminar</td>
+        <td>Seminar</td>
+        <td>MPP</td>
+        <td>18/12/2026</td>
+        <td>UiTM Shah Alam</td>
+        <td>100</td>
+        <td>Published</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
+      </tr>
+
+      <tr class="event-row">
+        <td>2</td>
+        <td>AI Workshop</td>
+        <td>Workshop</td>
+        <td>Computer Science Club</td>
+        <td>21/12/2026</td>
+        <td>UiTM Shah Alam</td>
+        <td>50</td>
+        <td>Published</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
+      </tr>
+
+      <tr class="event-row">
+        <td>3</td>
+        <td>Career Talk</td>
+        <td>Talk</td>
+        <td>Career Club</td>
+        <td>25/08/2026</td>
+        <td>UiTM Shah Alam</td>
+        <td>80</td>
+        <td>Completed</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
+      </tr>
+
+      <tr class="event-row">
+        <td>4</td>
+        <td>Sports Carnival</td>
+        <td>Sports</td>
+        <td>Sports Club</td>
+        <td>15/12/2026</td>
+        <td>UiTM Shah Alam</td>
+        <td>200</td>
+        <td>Cancelled</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
+      </tr>
+
+      <tr class="event-row">
+        <td>5</td>
+        <td>Entrepreneurship Forum</td>
+        <td>Forum</td>
+        <td>Entrepreneurship Club</td>
+        <td>28/12/2026</td>
+        <td>UiTM Shah Alam</td>
+        <td>120</td>
+        <td>Published</td>
+        <td>
+          <input type="button" value="View" onclick="viewEvent(this)" />
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      function searchEvents(event) {
+        event.preventDefault();
+
+        var name = document.getElementById("searchEvent").value.toLowerCase();
+
+        var status = document.getElementById("eventStatus").value;
+
+        var rows = document.getElementsByClassName("event-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          var eventName = rows[i].cells[1].textContent.toLowerCase();
+
+          var eventStatus = rows[i].cells[7].textContent;
+
+          if (
+            eventName.includes(name) &&
+            (status == "" || eventStatus == status)
+          ) {
+            rows[i].style.display = "";
+          } else {
+            rows[i].style.display = "none";
+          }
+        }
+
+        return false;
+      }
+
+      function resetSearch() {
+        document.getElementById("searchEvent").value = "";
+        document.getElementById("eventStatus").value = "";
+
+        var rows = document.getElementsByClassName("event-row");
+
+        for (var i = 0; i < rows.length; i++) {
+          rows[i].style.display = "";
+        }
+      }
+
+      function viewEvent(button) {
+        var row = button.closest("tr");
+
+        alert(
+          "Event: " +
+            row.cells[1].textContent +
+            "\nCategory: " +
+            row.cells[2].textContent +
+            "\nOrganizer: " +
+            row.cells[3].textContent +
+            "\nDate: " +
+            row.cells[4].textContent +
+            "\nLocation: " +
+            row.cells[5].textContent +
+            "\nCapacity: " +
+            row.cells[6].textContent +
+            "\nStatus: " +
+            row.cells[7].textContent,
+        );
+      }
+    </script>
+  </body>
+</html>
