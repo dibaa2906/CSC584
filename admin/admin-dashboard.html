@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CampusConnect - Admin Dashboard</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>CampusConnect</h1>
+
+    <a href="admin-dashboard.html">Dashboard</a> |
+    <a href="manage-users.html">Manage System</a> |
+    <a href="manage-users.html">Organizer Access</a> |
+    <a href="admin-events.html">Monitor Events</a> |
+    <a href="../index.html">Logout</a>
+
+    <hr />
+
+    <h2>Manage System</h2>
+
+    <table border="1" cellspacing="4" cellpadding="10">
+      <tr>
+        <th>Organizers</th>
+        <th>Published Events</th>
+        <th>Pending Requests</th>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>3</td>
+        <td>1</td>
+      </tr>
+    </table>
+
+    <br />
+
+    <form>
+      <table border="0" cellspacing="4" cellpadding="5">
+        <tr>
+          <td>Search Organizer:</td>
+          <td>
+            <input
+              type="text"
+              name="searchName"
+              placeholder="Search organizer name"
+            />
+          </td>
+          <td>
+            <input type="button" value="Search" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <br />
+
+    <table border="1" cellspacing="0" cellpadding="8">
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Email Address</th>
+        <th>Status</th>
+        <th>Action</th>
+        <th>Access Request</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Aisyah Nabila</td>
+        <td>Organizer</td>
+        <td>aisyah@example.com</td>
+        <td>Active</td>
+        <td><input type="button" value="View" /></td>
+        <td>Pending</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Wan Amirul</td>
+        <td>Organizer</td>
+        <td>amirul@example.com</td>
+        <td>Active</td>
+        <td><input type="button" value="View" /></td>
+        <td>Granted</td>
+      </tr>
+    </table>
+  </body>
+</html>

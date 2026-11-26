@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CampusConnect - Manage Organizer Access</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>CampusConnect</h1>
+
+    <a href="admin-dashboard.html">Dashboard</a> |
+    <a href="manage-users.html">Manage Users</a> |
+    <a href="admin-events.html">Monitor Events</a> |
+    <a href="../index.html">Logout</a>
+
+    <hr />
+
+    <h2>Manage Organizer Access</h2>
+
+    <form>
+      <table border="0" cellspacing="4" cellpadding="5">
+        <tr>
+          <td>Search Organizer:</td>
+          <td>
+            <input
+              type="text"
+              name="searchName"
+              placeholder="Search organizer name"
+            />
+          </td>
+          <td>Club:</td>
+          <td>
+            <select name="club">
+              <option value="">All Clubs</option>
+              <option value="MPP">MPP</option>
+              <option value="HEP">HEP</option>
+              <option value="Cultural">Kelab Kebudayaan</option>
+            </select>
+          </td>
+          <td>
+            <input type="button" value="Search" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <br />
+
+    <table border="1" cellspacing="0" cellpadding="8">
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Club Association</th>
+        <th>Access Status</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Aisyah Nabila Binti Rahaman</td>
+        <td>nabila123@gmail.com</td>
+        <td>Kelab Kebudayaan</td>
+        <td>Pending</td>
+        <td>
+          <input type="button" value="Grant Access" />
+          <input type="button" value="Revoke Access" />
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Wan Amirul</td>
+        <td>amirul@example.com</td>
+        <td>MPP</td>
+        <td>Granted</td>
+        <td>
+          <input type="button" value="Revoke Access" />
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CampusConnect - Login</title>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <h1>LOGIN</h1>
+    <p>SIGN IN TO YOUR ACCOUNT</p>
+
+    <form>
+      <table border="0" cellspacing="4" cellpadding="5">
+        <tr>
+          <td colspan="2">
+            <b>Select User Type:</b>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="radio" name="role" value="student" checked />
+            Student
+          </td>
+          <td>
+            <input type="radio" name="role" value="organizer" />
+            Organizer
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input
+              type="text"
+              name="loginId"
+              placeholder="Email or Student ID"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="button" value="Login" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <p>
+      Don't have an account?
+      <a href="register.html">Register here</a>
+    </p>
+  </body>
+</html>
