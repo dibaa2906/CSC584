@@ -25,23 +25,27 @@
         <p><a href="event-form.html"><button type="button">+ Create New Event</button></a></p>
 
         <div>
-            <input type="text" placeholder="Search Events">
-            <select>
-                <option>All Categories</option>
-                <option>Seminar</option>
-                <option>Workshop</option>
+            <input type="text" id="searchInput" placeholder="Search Events">
+            <select id="categoryFilter" onchange="filterEvents()">
+                <option value="ALL">All Categories</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Workshop">Workshop</option>
+                <option value="Sports">Sports</option>
+                <option value="Cultural">Cultural</option>
             </select>
-            <select>
-                <option>All Status</option>
-                <option>Ongoing</option>
-                <option>Upcoming</option>
-                <option>Cancelled</option>
+            <select id="statusFilter" onchange="filterEvents()">
+                <option value="ALL">All Status</option>
+                <option value="Ongoing">Ongoing</option>
+                <option value="Upcoming">Upcoming</option>
+                <option value="Cancelled">Cancelled</option>
             </select>
+            <button type="button" onclick="filterEvents()">Search</button>
+            <button type="button" onclick="resetFilters()">Reset</button>
         </div>
 
         <br>
 
-        <table border="1" cellpadding="8" cellspacing="0">
+        <table id="eventsTable" border="1" cellpadding="8" cellspacing="0">
             <thead>
                 <tr>
                     <th>Event Title</th>
@@ -80,6 +84,34 @@
             </tbody>
         </table>
     </main>
+
+    <script>
+        function filterEvents() {
+            const searchText = document.getElementById("searchInput").value.toUpperCase();
+            const selectedCategory = document.getElementById("categoryFilter").value;
+            const selectedStatus = document.getElementById("statusFilter").value;
+            const rows = document.querySelectorAll("#eventsTable tbody tr");
+
+            rows.forEach(row => {
+                const title = row.cells[0].innerText.toUpperCase();
+                const category = row.cells[1].innerText.trim();
+                const status = row.cells[4].innerText.trim();
+
+                const matchesSearch = title.includes(searchText);
+                const matchesCategory = (selectedCategory === "ALL") || (category === selectedCategory);
+                const matchesStatus = (selectedStatus === "ALL") || (status === selectedStatus);
+
+                row.style.display = (matchesSearch && matchesCategory && matchesStatus) ? "" : "none";
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById("searchInput").value = "";
+            document.getElementById("categoryFilter").value = "ALL";
+            document.getElementById("statusFilter").value = "ALL";
+            filterEvents();
+        }
+    </script>
 
 </body>
 </html>
