@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details | CampusConnect</title>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <table width="100%" cellpadding="10">
+                <tr>
+                    <td width="45%">
+                        <strong>CampusConnect</strong>
+                    </td>
+
+                    <td align="center">
+                        <a href="events.html">Explore Events</a>
+                    </td>
+
+                    <td align="center">
+                        <a href="my-favourite.html">My Interest</a>
+                    </td>
+
+                    <td align="center">
+                        <a href="student-dashboard.html">My Dashboard</a>
+                    </td>
+
+                    <td align="right">
+                        <a href="index.html" title="Log Out">👤</a>
+                    </td>
+                </tr>
+            </table>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Back Button -->
+        <p>
+            <a href="events.html">
+                &larr; Back to Discovery Events
+            </a>
+        </p>
+
+        <!-- Selected Event Details -->
+        <section id="event-details">
+
+            <table width="100%" cellpadding="20">
+
+                <tr>
+
+                    <!-- Event Image -->
+                    <td width="40%" valign="middle">
+                        <img id="event-image" alt="Event Image" width="100%">
+                    </td>
+
+                    <!-- Event Information -->
+                    <td width="60%" valign="top">
+
+                        <h1 id="event-name"></h1>
+
+                        <p>
+                            <span id="event-category"></span>
+                            <strong>Free</strong>
+                        </p>
+
+                        <p id="event-description"></p>
+
+                        <!-- Event Expiration Notice -->
+                        <p id="event-notice" hidden></p>
+
+                        <table cellpadding="8">
+
+                            <tr>
+                                <td>📅</td>
+                                <td><strong>Date</strong></td>
+                                <td>:</td>
+                                <td id="event-date"></td>
+                            </tr>
+
+                            <tr>
+                                <td>📍</td>
+                                <td><strong>Location</strong></td>
+                                <td>:</td>
+                                <td id="event-location"></td>
+                            </tr>
+
+                            <tr>
+                                <td>🕒</td>
+                                <td><strong>Time</strong></td>
+                                <td>:</td>
+                                <td id="event-time"></td>
+                            </tr>
+
+                            <tr>
+                                <td>⌛</td>
+                                <td><strong>Reg. Deadline</strong></td>
+                                <td>:</td>
+                                <td id="registration-deadline"></td>
+                            </tr>
+
+                        </table>
+
+                    </td>
+
+                </tr>
+
+                <!-- Event Actions -->
+                <tr>
+                    <td colspan="2" align="right">
+
+                        <button type="button" id="register-button">
+                            Register
+                        </button>
+
+                        <button type="button" id="interest-button">
+                            ♡ Add to My Interest
+                        </button>
+
+                    </td>
+                </tr>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <script>
+
+        // Dummy event data for storyboard purposes only.
+        // In the final implementation, event information will be
+        // dynamically retrieved from the database based on event ID.
+
+        const events = [
+            {
+                id: 1,
+                name: "Leadership Seminar",
+                category: "Seminar",
+                description: "A seminar that helps students develop leadership and communication skills.",
+                date: "18 November 2026",
+                location: "UiTM Shah Alam",
+                time: "10 AM - 2 PM",
+                deadline: "15 November 2026",
+                image: "images/leadership.jpg"
+            },
+            {
+                id: 2,
+                name: "AI Workshop",
+                category: "Workshop",
+                description: "A workshop introducing students to artificial intelligence.",
+                date: "21 December 2026",
+                location: "UiTM Shah Alam",
+                time: "9 AM - 12 PM",
+                deadline: "18 December 2026",
+                image: "images/ai-workshop.jpg"
+            },
+            {
+                id: 3,
+                name: "Career Talk",
+                category: "Talk",
+                description: "A talk that helps students explore career opportunities.",
+                date: "10 December 2026",
+                location: "UiTM Shah Alam",
+                time: "10 AM - 12 PM",
+                deadline: "7 December 2026",
+                image: "images/career-talk.jpg"
+            },
+            {
+                id: 4,
+                name: "Campus Fun Run",
+                category: "Sports",
+                description: "A running event that promotes a healthy and active lifestyle among students.",
+                date: "15 December 2026",
+                location: "UiTM Shah Alam",
+                time: "7 AM - 11 AM",
+                deadline: "12 December 2026",
+                image: "images/fun-run.jpg"
+            },
+            {
+                id: 5,
+                name: "Community Volunteer Programme",
+                category: "Volunteer",
+                description: "A volunteering programme that encourages students to contribute to the community.",
+                date: "28 December 2026",
+                location: "UiTM Shah Alam",
+                time: "8 AM - 1 PM",
+                deadline: "25 December 2026",
+                image: "images/volunteer.jpg"
+            },
+            {
+                id: 6,
+                name: "Coding Competition",
+                category: "Competition",
+                description: "A competition that allows students to demonstrate their programming and problem-solving skills.",
+                date: "30 December 2026",
+                location: "UiTM Shah Alam",
+                time: "9 AM - 4 PM",
+                deadline: "27 December 2026",
+                image: "images/coding.jpg"
+            }
+        ];
+
+        // Retrieve event ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const eventId = Number(params.get("id"));
+
+        // Find the selected event
+        const selectedEvent = events.find(event => event.id === eventId);
+
+        // Display selected event information
+        if (selectedEvent) {
+
+            document.getElementById("event-name").textContent =
+                selectedEvent.name;
+
+            document.getElementById("event-category").textContent =
+                selectedEvent.category + " | ";
+
+            document.getElementById("event-description").textContent =
+                selectedEvent.description;
+
+            document.getElementById("event-date").textContent =
+                selectedEvent.date;
+
+            document.getElementById("event-location").textContent =
+                selectedEvent.location;
+
+            document.getElementById("event-time").textContent =
+                selectedEvent.time;
+
+            document.getElementById("registration-deadline").textContent =
+                selectedEvent.deadline;
+
+            document.getElementById("event-image").src =
+                selectedEvent.image;
+
+            document.getElementById("event-image").alt =
+                selectedEvent.name;
+
+
+            // ==========================================
+            // ADD TO MY INTEREST FUNCTION
+            // ==========================================
+
+            // Retrieve favourite events
+            let favourites = JSON.parse(
+                localStorage.getItem("favouriteEvents") || "[]"
+            );
+
+            const interestButton =
+                document.getElementById("interest-button");
+
+            // Check if event is already saved
+            if (favourites.some(event => event.id === selectedEvent.id)) {
+
+                interestButton.textContent = "♥ Added to My Interest";
+                interestButton.disabled = true;
+
+            }
+
+            // Add selected event to favourite
+            interestButton.onclick = function () {
+
+                favourites = JSON.parse(
+                    localStorage.getItem("favouriteEvents") || "[]"
+                );
+
+                if (!favourites.some(event => event.id === selectedEvent.id)) {
+
+                    favourites.push(selectedEvent);
+
+                    localStorage.setItem(
+                        "favouriteEvents",
+                        JSON.stringify(favourites)
+                    );
+
+                    alert("Event successfully added to My Interest!");
+
+                }
+
+                interestButton.textContent = "♥ Added to My Interest";
+                interestButton.disabled = true;
+
+            };
+
+
+            // ==========================================
+            // REGISTER EVENT FUNCTION
+            // ==========================================
+
+            // Retrieve registered events
+            let registeredEvents = JSON.parse(
+                localStorage.getItem("registeredEvents") || "[]"
+            );
+
+            const registerButton =
+                document.getElementById("register-button");
+
+            const eventNotice =
+                document.getElementById("event-notice");
+
+            // Get current date
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Get event date and registration deadline
+            const eventDate = new Date(selectedEvent.date);
+            const deadline = new Date(selectedEvent.deadline);
+
+            // Check if event has expired
+            if (eventDate < today) {
+
+                eventNotice.textContent = "⚠ This event has expired.";
+                eventNotice.hidden = false;
+
+                registerButton.textContent = "Event Expired";
+                registerButton.disabled = true;
+
+            }
+
+            // Check if student has already registered
+            else if (registeredEvents.some(event => event.id === selectedEvent.id)) {
+
+                registerButton.textContent = "Registered";
+                registerButton.disabled = true;
+
+            }
+
+            // Check if registration is closed
+            else if (deadline < today) {
+
+                eventNotice.textContent = "⚠ Registration is closed.";
+                eventNotice.hidden = false;
+
+                registerButton.textContent = "Registration Closed";
+                registerButton.disabled = true;
+
+            }
+
+            // Allow student to register
+            else {
+
+                registerButton.onclick = function () {
+
+                    if (confirm("Are you sure you want to register for this event?")) {
+
+                        registeredEvents = JSON.parse(
+                            localStorage.getItem("registeredEvents") || "[]"
+                        );
+
+                        if (!registeredEvents.some(event => event.id === selectedEvent.id)) {
+
+                            registeredEvents.push(selectedEvent);
+
+                            localStorage.setItem(
+                                "registeredEvents",
+                                JSON.stringify(registeredEvents)
+                            );
+
+                            alert("Registration successful!");
+
+                        }
+
+                        registerButton.textContent = "Registered";
+                        registerButton.disabled = true;
+
+                    }
+
+                };
+
+            }
+
+        } else {
+
+            document.getElementById("event-details").innerHTML =
+                "<h2>Event not found.</h2>";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
