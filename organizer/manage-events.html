@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Events - CampusConnect</title>
+</head>
+<body>
+
+    <header>
+        <h2>CampusConnect</h2>
+        <nav>
+            <a href="organizer-dashboard.html">Dashboard</a> |
+            <a href="manage-events.html">Manage Events</a> |
+            <a href="attendance.html">Participants</a> |
+            <a href="../index.html">Logout</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        <h1>Manage Event</h1>
+        <p>CREATE, EDIT AND MONITOR YOUR EVENTS.</p>
+
+        <p><a href="event-form.html"><button type="button">+ Create New Event</button></a></p>
+
+        <div>
+            <input type="text" placeholder="Search Events">
+            <select>
+                <option>All Categories</option>
+                <option>Seminar</option>
+                <option>Workshop</option>
+            </select>
+            <select>
+                <option>All Status</option>
+                <option>Ongoing</option>
+                <option>Upcoming</option>
+                <option>Cancelled</option>
+            </select>
+        </div>
+
+        <br>
+
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Event Title</th>
+                    <th>Category</th>
+                    <th>Date &amp; Deadline</th>
+                    <th>Total Reg. / Capacity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Leadership Seminar</td>
+                    <td>Seminar</td>
+                    <td>18 November 2026 (Deadline: 15 Nov 2026)</td>
+                    <td>55 / 100</td>
+                    <td>Ongoing</td>
+                    <td>
+                        <a href="attendance.html">View Participants</a> |
+                        <a href="event-form.html">Edit</a> |
+                        <button type="button" onclick="confirm('Cancel this event?')">Cancel</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>AI Workshop</td>
+                    <td>Workshop</td>
+                    <td>21 December 2026 (Deadline: 18 Dec 2026)</td>
+                    <td>80 / 80</td>
+                    <td>Upcoming</td>
+                    <td>
+                        <a href="attendance.html">View Participants</a> |
+                        <a href="event-form.html">Edit</a> |
+                        <button type="button" onclick="confirm('Cancel this event?')">Cancel</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+</html>
