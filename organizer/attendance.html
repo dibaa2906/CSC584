@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Participants &amp; Attendance - CampusConnect</title>
+</head>
+<body>
+
+    <header>
+        <h2>CampusConnect</h2>
+        <nav>
+            <a href="organizer-dashboard.html">Dashboard</a> |
+            <a href="manage-events.html">Manage Events</a> |
+            <a href="attendance.html">Participants</a> |
+            <a href="../index.html">Logout</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        <h1>View Participant &amp; Attendance</h1>
+        <p>View and manage registered participants for this event.</p>
+
+        <section>
+            <label for="eventSelect"><strong>Select Event:</strong></label>
+            <select id="eventSelect">
+                <option>Leadership Seminar (18 November 2026)</option>
+                <option>AI Workshop (21 December 2026)</option>
+            </select>
+
+            <h2>Leadership Seminar</h2>
+            <p>
+                <strong>Date:</strong> 18 November 2026 |
+                <strong>Time:</strong> 10AM - 2PM |
+                <strong>Location:</strong> UiTM Shah Alam |
+                <strong>Total Registered:</strong> 2 / 100
+            </p>
+        </section>
+
+        <div>
+            <button type="button" id="btnAll" onclick="setStatusFilter('ALL')">All Participants (2)</button>
+            <button type="button" id="btnPresent" onclick="setStatusFilter('Present')">Present (1)</button>
+            <button type="button" id="btnAbsent" onclick="setStatusFilter('Absent')">Absent (0)</button>
+        </div>
+
+        <br>
+
+        <div>
+            <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search participant (name / student ID)...">
+            <select id="statusDropdown" onchange="filterTable()">
+                <option value="ALL">All Attendance Status</option>
+                <option value="Registered">Registered</option>
+                <option value="Present">Present</option>
+                <option value="Absent">Absent</option>
+            </select>
+        </div>
+
+        <br>
+
+        <table id="participantTable" border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Faculty</th>
+                    <th>Register Date</th>
+                    <th>Attendance Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2024661234</td>
+                    <td>AINI SOFEA</td>
+                    <td>FSKM</td>
+                    <td>25/10/2026</td>
+                    <td id="status-1" class="status-cell">Present</td>
+                    <td>
+                        <button type="button" onclick="updateStatus('status-1', 'Present')">Present</button>
+                        <button type="button" onclick="updateStatus('status-1', 'Absent')">Absent</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>202534676</td>
+                    <td>AHMAD AKMAL</td>
+                    <td>FKA</td>
+                    <td>2/11/2026</td>
+                    <td id="status-2" class="status-cell">Registered</td>
+                    <td>
+                        <button type="button" onclick="updateStatus('status-2', 'Present')">Present</button>
+                        <button type="button" onclick="updateStatus('status-2', 'Absent')">Absent</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        function updateStatus(cellId, newStatus) {
+            document.getElementById(cellId).innerText = newStatus;
+            updateCounters();
+            filterTable();
+        }
+
+        function setStatusFilter(status) {
+            document.getElementById("statusDropdown").value = status;
+            filterTable();
+        }
+
+        function filterTable() {
+            const searchText = document.getElementById("searchInput").value.toUpperCase();
+            const selectedStatus = document.getElementById("statusDropdown").value;
+            const rows = document.querySelectorAll("#participantTable tbody tr");
+
+            rows.forEach(row => {
+                const studentId = row.cells[1].innerText.toUpperCase();
+                const name = row.cells[2].innerText.toUpperCase();
+                const status = row.cells[5].innerText.trim();
+
+                const matchesSearch = studentId.includes(searchText) || name.includes(searchText);
+                const matchesStatus = (selectedStatus === "ALL") || (status === selectedStatus);
+
+                row.style.display = (matchesSearch && matchesStatus) ? "" : "none";
+            });
+        }
+
+        function updateCounters() {
+            const statuses = Array.from(document.querySelectorAll(".status-cell")).map(td => td.innerText.trim());
+            const total = statuses.length;
+            const presentCount = statuses.filter(s => s === "Present").length;
+            const absentCount = statuses.filter(s => s === "Absent").length;
+
+            document.getElementById("btnAll").innerText = `All Participants (${total})`;
+            document.getElementById("btnPresent").innerText = `Present (${presentCount})`;
+            document.getElementById("btnAbsent").innerText = `Absent (${absentCount})`;
+        }
+    </script>
+
+</body>
+</html>
