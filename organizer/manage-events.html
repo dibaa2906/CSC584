@@ -1,117 +1,357 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Events - CampusConnect</title>
-</head>
-<body>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
+  <body class="organizer-page organizer-manage-page">
+    <!-- Navigation Bar -->
     <header>
+      <div class="brand">
+        <img src="../images/logo.png" alt="CampusConnect Logo" class="logo" />
         <h2>CampusConnect</h2>
-        <nav>
-            <a href="organizer-dashboard.html">Dashboard</a> |
-            <a href="manage-events.html">Manage Events</a> |
-            <a href="attendance.html">Participants</a> |
-            <a href="../index.html">Logout</a>
-        </nav>
-        <hr>
+      </div>
+
+      <nav>
+        <a href="organizer-dashboard.html">Dashboard</a> |
+        <a href="manage-events.html">Manage Events</a> |
+        <a href="attendance.html">Participants</a> |
+        <a href="../index.html">Logout</a>
+      </nav>
+
+      <hr />
     </header>
 
     <main>
-        <h1>Manage Event</h1>
-        <p>CREATE, EDIT AND MONITOR YOUR EVENTS.</p>
+      <!-- Page Header -->
+      <h1>Manage Event</h1>
+      <p>CREATE, EDIT AND MONITOR YOUR EVENTS.</p>
 
-        <p><a href="event-form.html"><button type="button">+ Create New Event</button></a></p>
+      <!-- Create Event -->
+      <p>
+        <a href="event-form.html" class="create-event-btn">
+          + Create New Event
+        </a>
+      </p>
 
-        <div>
-            <input type="text" id="searchInput" placeholder="Search Events">
-            <select id="categoryFilter" onchange="filterEvents()">
-                <option value="ALL">All Categories</option>
-                <option value="Seminar">Seminar</option>
-                <option value="Workshop">Workshop</option>
-                <option value="Sports">Sports</option>
-                <option value="Cultural">Cultural</option>
-            </select>
-            <select id="statusFilter" onchange="filterEvents()">
-                <option value="ALL">All Status</option>
-                <option value="Ongoing">Ongoing</option>
-                <option value="Upcoming">Upcoming</option>
-                <option value="Cancelled">Cancelled</option>
-            </select>
-            <button type="button" onclick="filterEvents()">Search</button>
-            <button type="button" onclick="resetFilters()">Reset</button>
-        </div>
+      <!-- Search and Filter -->
+      <div class="event-filters">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search Events"
+          oninput="filterEvents()"
+        />
 
-        <br>
+        <select id="categoryFilter" onchange="filterEvents()">
+          <option value="ALL">All Categories</option>
+          <option value="Seminar">Seminar</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Sports">Sports</option>
+          <option value="Cultural">Cultural</option>
+        </select>
 
-        <table id="eventsTable" border="1" cellpadding="8" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Event Title</th>
-                    <th>Category</th>
-                    <th>Date &amp; Deadline</th>
-                    <th>Total Reg. / Capacity</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Leadership Seminar</td>
-                    <td>Seminar</td>
-                    <td>18 November 2026 (Deadline: 15 Nov 2026)</td>
-                    <td>55 / 100</td>
-                    <td>Ongoing</td>
-                    <td>
-                        <a href="attendance.html">View Participants</a> |
-                        <a href="event-form.html">Edit</a> |
-                        <button type="button" onclick="confirm('Cancel this event?')">Cancel</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>AI Workshop</td>
-                    <td>Workshop</td>
-                    <td>21 December 2026 (Deadline: 18 Dec 2026)</td>
-                    <td>80 / 80</td>
-                    <td>Upcoming</td>
-                    <td>
-                        <a href="attendance.html">View Participants</a> |
-                        <a href="event-form.html">Edit</a> |
-                        <button type="button" onclick="confirm('Cancel this event?')">Cancel</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <select id="statusFilter" onchange="filterEvents()">
+          <option value="ALL">All Status</option>
+          <option value="Ongoing">Ongoing</option>
+          <option value="Upcoming">Upcoming</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+
+        <button type="button" onclick="filterEvents()">Search</button>
+
+        <button type="button" onclick="resetFilters()">Reset</button>
+      </div>
+
+      <br />
+
+      <!-- Event List -->
+      <table id="eventsTable" border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Event Title</th>
+            <th>Category</th>
+            <th>Date &amp; Deadline</th>
+            <th>Total Reg. / Capacity</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <!-- Event 1: Leadership Seminar -->
+          <tr data-event-id="1">
+            <td>Leadership Seminar</td>
+            <td>Seminar</td>
+            <td>18 November 2026 (Deadline: 15 Nov 2026)</td>
+            <td>55 / 100</td>
+            <td>Completed</td>
+            <td>
+              <a href="attendance.html?id=1"> View Participants </a> |
+
+              <a href="event-form.html?id=1"> Edit </a> |
+
+              <button type="button" disabled>Completed</button>
+            </td>
+          </tr>
+
+          <!-- Event 2: AI Workshop -->
+          <tr data-event-id="2">
+            <td>AI Workshop</td>
+            <td>Workshop</td>
+            <td>21 December 2026 (Deadline: 18 Dec 2026)</td>
+            <td>80 / 80</td>
+            <td>Upcoming</td>
+            <td>
+              <a href="attendance.html?id=2"> View Participants </a> |
+
+              <a href="event-form.html?id=2"> Edit </a> |
+
+              <button type="button" onclick="cancelEvent(this)">Cancel</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </main>
 
     <script>
-        function filterEvents() {
-            const searchText = document.getElementById("searchInput").value.toUpperCase();
-            const selectedCategory = document.getElementById("categoryFilter").value;
-            const selectedStatus = document.getElementById("statusFilter").value;
-            const rows = document.querySelectorAll("#eventsTable tbody tr");
+      // ==========================================
+      // SEARCH AND FILTER EVENTS
+      // ==========================================
 
-            rows.forEach(row => {
-                const title = row.cells[0].innerText.toUpperCase();
-                const category = row.cells[1].innerText.trim();
-                const status = row.cells[4].innerText.trim();
+      function filterEvents() {
+        const searchText = document
+          .getElementById("searchInput")
+          .value.toUpperCase()
+          .trim();
 
-                const matchesSearch = title.includes(searchText);
-                const matchesCategory = (selectedCategory === "ALL") || (category === selectedCategory);
-                const matchesStatus = (selectedStatus === "ALL") || (status === selectedStatus);
+        const selectedCategory =
+          document.getElementById("categoryFilter").value;
 
-                row.style.display = (matchesSearch && matchesCategory && matchesStatus) ? "" : "none";
-            });
+        const selectedStatus = document.getElementById("statusFilter").value;
+
+        const rows = document.querySelectorAll("#eventsTable tbody tr");
+
+        rows.forEach(function (row) {
+          const title = row.cells[0].textContent.toUpperCase();
+
+          const category = row.cells[1].textContent.trim();
+
+          const status = row.cells[4].textContent.trim();
+
+          const matchesSearch = title.includes(searchText);
+
+          const matchesCategory =
+            selectedCategory === "ALL" || category === selectedCategory;
+
+          const matchesStatus =
+            selectedStatus === "ALL" || status === selectedStatus;
+
+          if (matchesSearch && matchesCategory && matchesStatus) {
+            row.style.display = "";
+          } else {
+            row.style.display = "none";
+          }
+        });
+      }
+
+      // ==========================================
+      // RESET FILTERS
+      // ==========================================
+
+      function resetFilters() {
+        document.getElementById("searchInput").value = "";
+
+        document.getElementById("categoryFilter").value = "ALL";
+
+        document.getElementById("statusFilter").value = "ALL";
+
+        filterEvents();
+      }
+
+      // ==========================================
+      // CANCEL EVENT
+      // ==========================================
+
+      function cancelEvent(button) {
+        const row = button.closest("tr");
+
+        const eventId = row.getAttribute("data-event-id");
+
+        const eventName = row.cells[0].textContent.trim();
+
+        const answer = confirm(
+          "Are you sure you want to cancel " + eventName + "?",
+        );
+
+        if (answer === true) {
+          row.cells[4].textContent = "Cancelled";
+
+          button.textContent = "Cancelled";
+
+          button.disabled = true;
+
+          // Save cancelled event in browser
+          localStorage.setItem("campusconnect_cancelled_" + eventId, "true");
+
+          alert("Event cancelled successfully!");
+
+          filterEvents();
         }
+      }
 
-        function resetFilters() {
-            document.getElementById("searchInput").value = "";
-            document.getElementById("categoryFilter").value = "ALL";
-            document.getElementById("statusFilter").value = "ALL";
-            filterEvents();
-        }
+      // ==========================================
+      // LOAD CANCELLED EVENT STATUS
+      // ==========================================
+
+      function loadCancelledEvents() {
+        const rows = document.querySelectorAll("#eventsTable tbody tr");
+
+        rows.forEach(function (row) {
+          const eventId = row.getAttribute("data-event-id");
+
+          const isCancelled = localStorage.getItem(
+            "campusconnect_cancelled_" + eventId,
+          );
+
+          if (isCancelled === "true") {
+            row.cells[4].textContent = "Cancelled";
+
+            const button = row.querySelector("button");
+
+            if (button !== null) {
+              button.textContent = "Cancelled";
+              button.disabled = true;
+            }
+          }
+        });
+      }
+
+      // ==========================================
+      // DISPLAY CREATED AND UPDATED EVENTS
+      // ==========================================
+
+      function displaySavedEvents() {
+        const savedEvents = JSON.parse(
+          localStorage.getItem("campusconnect_organizer_events") || "[]",
+        );
+
+        const tableBody = document.querySelector("#eventsTable tbody");
+
+        savedEvents.forEach(function (event) {
+          // Find existing event row
+          let row = Array.from(tableBody.rows).find(function (item) {
+            return item.getAttribute("data-event-id") == String(event.id);
+          });
+
+          // Create row for a new event
+          if (!row) {
+            row = document.createElement("tr");
+
+            row.setAttribute("data-event-id", event.id);
+
+            for (let i = 0; i < 6; i++) {
+              row.appendChild(document.createElement("td"));
+            }
+
+            tableBody.appendChild(row);
+          }
+
+          // Format event date
+          const dateParts = event.date.split("-");
+
+          const eventDate = new Date(
+            Number(dateParts[0]),
+            Number(dateParts[1]) - 1,
+            Number(dateParts[2]),
+          );
+
+          const formattedDate = eventDate.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+
+          // Update event information
+          row.cells[0].textContent = event.title;
+
+          row.cells[1].textContent = event.category;
+
+          row.cells[2].textContent =
+            formattedDate + " (Deadline: " + event.deadline + ")";
+
+          row.cells[3].textContent =
+            event.registeredCount + " / " + event.capacity;
+
+          row.cells[4].textContent = event.status;
+
+          // ==========================================
+          // CREATE ACTION LINKS
+          // ==========================================
+
+          const actionCell = row.cells[5];
+
+          actionCell.innerHTML = "";
+
+          // View Participants
+          const participantsLink = document.createElement("a");
+
+          participantsLink.href = "attendance.html?id=" + event.id;
+
+          participantsLink.textContent = "View Participants";
+
+          // Edit Event
+          const editLink = document.createElement("a");
+
+          editLink.href = "event-form.html?id=" + event.id;
+
+          editLink.textContent = "Edit";
+
+          // Cancel Event
+          const cancelButton = document.createElement("button");
+
+          cancelButton.type = "button";
+
+          if (event.status === "Cancelled" || event.status === "Completed") {
+            cancelButton.textContent = event.status;
+
+            cancelButton.disabled = true;
+          } else {
+            cancelButton.textContent = "Cancel";
+
+            cancelButton.onclick = function () {
+              cancelEvent(this);
+            };
+          }
+
+          // Add actions to table
+          actionCell.appendChild(participantsLink);
+
+          actionCell.appendChild(document.createTextNode(" | "));
+
+          actionCell.appendChild(editLink);
+
+          actionCell.appendChild(document.createTextNode(" | "));
+
+          actionCell.appendChild(cancelButton);
+        });
+
+        // Restore cancelled statuses
+        loadCancelledEvents();
+
+        // Apply current filters
+        filterEvents();
+      }
+
+      // ==========================================
+      // LOAD EVENTS WHEN PAGE OPENS
+      // ==========================================
+
+      displaySavedEvents();
     </script>
-
-</body>
+  </body>
 </html>

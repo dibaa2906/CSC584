@@ -1,249 +1,201 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registered Event History | CampusConnect</title>
-</head>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<body>
-
+  <body class="student-page student-tickets-page">
     <!-- Navigation Bar -->
     <header>
-        <nav>
-            <table width="100%" cellpadding="10">
-                <tr>
-                    <td width="45%">
-                        <strong>CampusConnect</strong>
-                    </td>
+      <nav>
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td width="45%">
+              <div class="brand">
+                <img
+                  src="../images/logo.png"
+                  alt="CampusConnect Logo"
+                  class="logo"
+                />
+                <strong>CampusConnect</strong>
+              </div>
+            </td>
 
-                    <td align="center">
-                        <a href="events.html">Explore Events</a>
-                    </td>
+            <td align="center">
+              <a href="events.html">Explore Events</a>
+            </td>
 
-                    <td align="center">
-                        <a href="my-favourite.html">My Interest</a>
-                    </td>
+            <td align="center">
+              <a href="my-favourite.html">My Interest</a>
+            </td>
 
-                    <td align="center">
-                        <a href="student-dashboard.html">My Dashboard</a>
-                    </td>
+            <td align="center">
+              <a href="student-dashboard.html">My Dashboard</a>
+            </td>
 
-                    <td align="right">
-                        <a href="index.html" title="Log Out">👤</a>
-                    </td>
-                </tr>
-            </table>
-        </nav>
+            <td align="right">
+              <a href="../index.html" title="Log Out">Log Out</a>
+            </td>
+          </tr>
+        </table>
+      </nav>
     </header>
 
     <main>
+      <!-- Back Button -->
+      <p>
+        <a href="student-dashboard.html"> &larr; Back to Student Dashboard </a>
+      </p>
 
-        <!-- Back Button -->
-        <p>
-            <a href="student-dashboard.html">
-                &larr; Back to Student Dashboard
-            </a>
-        </p>
+      <!-- Page Header -->
+      <section class="page-header">
+        <h1>📅 Registered Event History</h1>
 
-        <!-- Page Header -->
-        <section class="page-header">
+        <p>A record of all events you have registered for.</p>
+      </section>
 
-            <h1>📅 Registered Event History</h1>
+      <br />
 
-            <p>A record of all events you have registered for.</p>
+      <!-- Event Filter Tabs -->
+      <section class="event-filter">
+        <table border="1" width="100%" cellpadding="15" cellspacing="0">
+          <tr>
+            <td width="33%" align="center">
+              <a href="#all" id="all-tab"> All Events (0) </a>
+            </td>
 
-        </section>
+            <td width="33%" align="center">
+              <a href="#upcoming" id="upcoming-tab"> Upcoming (0) </a>
+            </td>
 
-        <br>
+            <td width="33%" align="center">
+              <a href="#completed" id="completed-tab"> Completed (0) </a>
+            </td>
+          </tr>
+        </table>
+      </section>
 
-        <!-- Event Filter Tabs -->
-        <section class="event-filter">
+      <br /><br />
 
-            <table border="1" width="100%"
-                cellpadding="15" cellspacing="0">
+      <!-- Registered Event Table -->
+      <section class="registered-events">
+        <table border="1" width="100%" cellpadding="15" cellspacing="0">
+          <thead>
+            <tr>
+              <th width="35%">Event</th>
+              <th width="30%">Date</th>
+              <th width="20%">Status</th>
+              <th width="15%">Action</th>
+            </tr>
+          </thead>
 
-                <tr>
-
-                    <td width="33%" align="center">
-                        <a href="#all" id="all-tab">
-                            All Events (0)
-                        </a>
-                    </td>
-
-                    <td width="33%" align="center">
-                        <a href="#upcoming" id="upcoming-tab">
-                            Upcoming (0)
-                        </a>
-                    </td>
-
-                    <td width="33%" align="center">
-                        <a href="#completed" id="completed-tab">
-                            Completed (0)
-                        </a>
-                    </td>
-
-                </tr>
-
-            </table>
-
-        </section>
-
-        <br><br>
-
-        <!-- Registered Event Table -->
-        <section class="registered-events">
-
-            <table border="1" width="100%"
-                cellpadding="15" cellspacing="0">
-
-                <thead>
-
-                    <tr>
-                        <th width="35%">Event</th>
-                        <th width="30%">Date</th>
-                        <th width="20%">Status</th>
-                        <th width="15%">Action</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="event-history">
-
-                    <!-- Registered events will be displayed here -->
-
-                </tbody>
-
-            </table>
-
-        </section>
-
+          <tbody id="event-history">
+            <!-- Registered events will be displayed here -->
+          </tbody>
+        </table>
+      </section>
     </main>
 
     <script>
+      // Sample registration data for storyboard purposes only.
+      // In the final implementation, registered events will be
+      // dynamically retrieved from the database.
 
-        // Sample registration data for storyboard purposes only.
-        // In the final implementation, registered events will be
-        // dynamically retrieved from the database.
+      if (localStorage.getItem("registeredEvents") === null) {
+        const sampleEvents = [
+          {
+            id: 1,
+            name: "Leadership Seminar",
+            date: "18 November 2026",
+            location: "UiTM Shah Alam",
+          },
+          {
+            id: 2,
+            name: "AI Workshop",
+            date: "21 December 2026",
+            location: "UiTM Shah Alam",
+          },
+        ];
 
-        if (localStorage.getItem("registeredEvents") === null) {
+        localStorage.setItem("registeredEvents", JSON.stringify(sampleEvents));
+      }
 
-            const sampleEvents = [
-                {
-                    id: 1,
-                    name: "Leadership Seminar",
-                    date: "18 November 2026",
-                    location: "UiTM Shah Alam"
-                },
-                {
-                    id: 2,
-                    name: "AI Workshop",
-                    date: "21 December 2026",
-                    location: "UiTM Shah Alam"
-                }
-            ];
+      // ==========================================
+      // DISPLAY REGISTERED EVENT HISTORY
+      // ==========================================
 
-            localStorage.setItem(
-                "registeredEvents",
-                JSON.stringify(sampleEvents)
-            );
+      function displayEvents(filter = "all") {
+        // Retrieve registered events
+        const registeredEvents = JSON.parse(
+          localStorage.getItem("registeredEvents") || "[]",
+        );
+
+        // Get current date
+        const today = new Date();
+
+        today.setHours(0, 0, 0, 0);
+
+        // Filter upcoming events
+        const upcomingEvents = registeredEvents.filter((event) => {
+          return new Date(event.date) >= today;
+        });
+
+        // Filter completed events
+        const completedEvents = registeredEvents.filter((event) => {
+          return new Date(event.date) < today;
+        });
+
+        // ==========================================
+        // UPDATE EVENT COUNTS
+        // ==========================================
+
+        document.getElementById("all-tab").textContent =
+          "All Events (" + registeredEvents.length + ")";
+
+        document.getElementById("upcoming-tab").textContent =
+          "Upcoming (" + upcomingEvents.length + ")";
+
+        document.getElementById("completed-tab").textContent =
+          "Completed (" + completedEvents.length + ")";
+
+        // ==========================================
+        // FILTER SELECTED EVENTS
+        // ==========================================
+
+        let selectedEvents;
+
+        if (filter === "upcoming") {
+          selectedEvents = upcomingEvents;
+        } else if (filter === "completed") {
+          selectedEvents = completedEvents;
+        } else {
+          selectedEvents = registeredEvents;
         }
 
+        // Highlight selected tab
+        document.getElementById("all-tab").style.fontWeight =
+          filter === "all" ? "bold" : "normal";
+
+        document.getElementById("upcoming-tab").style.fontWeight =
+          filter === "upcoming" ? "bold" : "normal";
+
+        document.getElementById("completed-tab").style.fontWeight =
+          filter === "completed" ? "bold" : "normal";
 
         // ==========================================
-        // DISPLAY REGISTERED EVENT HISTORY
+        // DISPLAY EVENT TABLE
         // ==========================================
 
-        function displayEvents(filter = "all") {
+        const container = document.getElementById("event-history");
 
-            // Retrieve registered events
-            const registeredEvents = JSON.parse(
-                localStorage.getItem("registeredEvents") || "[]"
-            );
+        container.innerHTML = "";
 
-            // Get current date
-            const today = new Date();
-
-            today.setHours(0, 0, 0, 0);
-
-
-            // Filter upcoming events
-            const upcomingEvents = registeredEvents.filter(event => {
-
-                return new Date(event.date) >= today;
-
-            });
-
-
-            // Filter completed events
-            const completedEvents = registeredEvents.filter(event => {
-
-                return new Date(event.date) < today;
-
-            });
-
-
-            // ==========================================
-            // UPDATE EVENT COUNTS
-            // ==========================================
-
-            document.getElementById("all-tab").textContent =
-                "All Events (" + registeredEvents.length + ")";
-
-            document.getElementById("upcoming-tab").textContent =
-                "Upcoming (" + upcomingEvents.length + ")";
-
-            document.getElementById("completed-tab").textContent =
-                "Completed (" + completedEvents.length + ")";
-
-
-            // ==========================================
-            // FILTER SELECTED EVENTS
-            // ==========================================
-
-            let selectedEvents;
-
-            if (filter === "upcoming") {
-
-                selectedEvents = upcomingEvents;
-
-            } else if (filter === "completed") {
-
-                selectedEvents = completedEvents;
-
-            } else {
-
-                selectedEvents = registeredEvents;
-
-            }
-
-
-            // Highlight selected tab
-            document.getElementById("all-tab").style.fontWeight =
-                filter === "all" ? "bold" : "normal";
-
-            document.getElementById("upcoming-tab").style.fontWeight =
-                filter === "upcoming" ? "bold" : "normal";
-
-            document.getElementById("completed-tab").style.fontWeight =
-                filter === "completed" ? "bold" : "normal";
-
-
-            // ==========================================
-            // DISPLAY EVENT TABLE
-            // ==========================================
-
-            const container =
-                document.getElementById("event-history");
-
-            container.innerHTML = "";
-
-
-            // Check if there are no events
-            if (selectedEvents.length === 0) {
-
-                container.innerHTML = `
+        // Check if there are no events
+        if (selectedEvents.length === 0) {
+          container.innerHTML = `
                     <tr>
                         <td colspan="4" align="center">
                             No events found.
@@ -251,22 +203,16 @@
                     </tr>
                 `;
 
-                return;
+          return;
+        }
 
-            }
+        // Display selected events
+        selectedEvents.forEach(function (event) {
+          const eventDate = new Date(event.date);
 
+          const status = eventDate < today ? "Completed" : "Registered";
 
-            // Display selected events
-            selectedEvents.forEach(function (event) {
-
-                const eventDate = new Date(event.date);
-
-                const status =
-                    eventDate < today
-                    ? "Completed"
-                    : "Registered";
-
-                container.innerHTML += `
+          container.innerHTML += `
 
                     <tr>
 
@@ -293,52 +239,36 @@
                     </tr>
 
                 `;
+        });
+      }
 
-            });
+      // ==========================================
+      // HANDLE SELECTED TAB
+      // ==========================================
 
+      function loadSelectedTab() {
+        const filter = window.location.hash.substring(1);
+
+        if (filter === "upcoming") {
+          displayEvents("upcoming");
+        } else if (filter === "completed") {
+          displayEvents("completed");
+        } else {
+          displayEvents("all");
         }
+      }
 
+      // Display events when page is opened
+      loadSelectedTab();
 
-        // ==========================================
-        // HANDLE SELECTED TAB
-        // ==========================================
+      // Display selected tab when clicked
+      window.addEventListener("hashchange", loadSelectedTab);
 
-        function loadSelectedTab() {
+      // Refresh events when returning to the page
+      window.addEventListener("pageshow", loadSelectedTab);
 
-            const filter =
-                window.location.hash.substring(1);
-
-            if (filter === "upcoming") {
-
-                displayEvents("upcoming");
-
-            } else if (filter === "completed") {
-
-                displayEvents("completed");
-
-            } else {
-
-                displayEvents("all");
-
-            }
-
-        }
-
-
-        // Display events when page is opened
-        loadSelectedTab();
-
-        // Display selected tab when clicked
-        window.addEventListener("hashchange", loadSelectedTab);
-
-        // Refresh events when returning to the page
-        window.addEventListener("pageshow", loadSelectedTab);
-
-        // Update when Local Storage changes
-        window.addEventListener("storage", loadSelectedTab);
-
+      // Update when Local Storage changes
+      window.addEventListener("storage", loadSelectedTab);
     </script>
-
-</body>
-
+  </body>
 </html>

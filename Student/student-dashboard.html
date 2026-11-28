@@ -1,212 +1,182 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard | CampusConnect</title>
-</head>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<body>
-
+  <body class="student-page">
     <!-- Navigation Bar -->
     <header>
-        <nav>
-            <table width="100%" cellpadding="10">
-                <tr>
-                    <td width="45%">
-                        <strong>CampusConnect</strong>
-                    </td>
+      <nav>
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td width="45%">
+              <div class="brand">
+                <img
+                  src="../images/logo.png"
+                  alt="CampusConnect Logo"
+                  class="logo"
+                />
+                <strong>CampusConnect</strong>
+              </div>
+            </td>
 
-                    <td align="center">
-                        <a href="events.html">Explore Events</a>
-                    </td>
+            <td align="center">
+              <a href="events.html">Explore Events</a>
+            </td>
 
-                    <td align="center">
-                        <a href="my-favourite.html">My Interest</a>
-                    </td>
+            <td align="center">
+              <a href="my-favourite.html">My Interest</a>
+            </td>
 
-                    <td align="center">
-                        <a href="student-dashboard.html">My Dashboard</a>
-                    </td>
+            <td align="center">
+              <a href="student-dashboard.html">My Dashboard</a>
+            </td>
 
-                    <td align="right">
-                        <a href="index.html" title="Log Out">
-                            👤
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </nav>
+            <td align="right">
+              <a href="../index.html" title="Log Out"> Log Out </a>
+            </td>
+          </tr>
+        </table>
+      </nav>
     </header>
 
     <main>
+      <!-- Dashboard Header -->
+      <section class="dashboard-header">
+        <h1>Student Dashboard</h1>
+        <p>Welcome back, Student!</p>
+      </section>
 
-        <!-- Dashboard Header -->
-        <section class="dashboard-header">
-            <h1>Student Dashboard</h1>
-            <p>Welcome back, Student!</p>
-        </section>
+      <!-- Event Overview -->
+      <section class="event-overview">
+        <table width="100%">
+          <tr>
+            <td align="center">
+              <h2 id="registered-count">0</h2>
+              <a href="my-tickets.html"> Registered Events </a>
+            </td>
 
-        <!-- Event Overview -->
-        <section class="event-overview">
+            <td align="center">
+              <h2 id="favourite-count">0</h2>
+              <a href="my-favourite.html"> Favorites </a>
+            </td>
 
-            <table width="100%">
-                <tr>
-                    <td align="center">
-                        <h2 id="registered-count">0</h2>
-                        <a href="my-tickets.html">
-                            Registered Events
-                        </a>
-                    </td>
+            <td align="center">
+              <h2 id="completed-count">0</h2>
+              <a href="my-tickets.html#completed"> Completed Events </a>
+            </td>
+          </tr>
+        </table>
+      </section>
 
-                    <td align="center">
-                        <h2 id="favourite-count">0</h2>
-                        <a href="my-favourite.html">
-                            Favorites
-                        </a>
-                    </td>
+      <!-- Upcoming Events -->
+      <section class="upcoming-events">
+        <h2>My Upcoming Events</h2>
+        <a href="my-tickets.html">View All &gt;</a>
 
-                    <td align="center">
-                        <h2 id="completed-count">0</h2>
-                        <a href="my-tickets.html#completed">
-                            Completed Events
-                        </a>
-                    </td>
-                </tr>
-            </table>
+        <table border="1" width="100%" cellpadding="10" cellspacing="0">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
 
-        </section>
-
-        <!-- Upcoming Events -->
-        <section class="upcoming-events">
-
-            <h2>My Upcoming Events</h2>
-            <a href="my-tickets.html">View All &gt;</a>
-
-            <table border="1" width="100%"
-                cellpadding="10" cellspacing="0">
-
-                <thead>
-                    <tr>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody id="upcoming-event-list">
-
-                    <!-- Registered events will be displayed here -->
-
-                </tbody>
-
-            </table>
-
-        </section>
-
+          <tbody id="upcoming-event-list">
+            <!-- Registered events will be displayed here -->
+          </tbody>
+        </table>
+      </section>
     </main>
 
     <script>
+      // Sample registration data for storyboard purposes only.
+      // In the final implementation, registered events will be
+      // dynamically retrieved from the database.
 
-        // Sample registration data for storyboard purposes only.
-        // In the final implementation, registered events will be
-        // dynamically retrieved from the database.
+      if (localStorage.getItem("registeredEvents") === null) {
+        const sampleEvents = [
+          {
+            id: 1,
+            name: "Leadership Seminar",
+            date: "18 November 2026",
+            location: "UiTM Shah Alam",
+          },
+          {
+            id: 2,
+            name: "AI Workshop",
+            date: "21 December 2026",
+            location: "UiTM Shah Alam",
+          },
+        ];
 
-        if (localStorage.getItem("registeredEvents") === null) {
+        localStorage.setItem("registeredEvents", JSON.stringify(sampleEvents));
+      }
 
-            const sampleEvents = [
-                {
-                    id: 1,
-                    name: "Leadership Seminar",
-                    date: "18 November 2026",
-                    location: "UiTM Shah Alam"
-                },
-                {
-                    id: 2,
-                    name: "AI Workshop",
-                    date: "21 December 2026",
-                    location: "UiTM Shah Alam"
-                }
-            ];
+      // ==========================================
+      // DISPLAY STUDENT DASHBOARD
+      // ==========================================
 
-            localStorage.setItem(
-                "registeredEvents",
-                JSON.stringify(sampleEvents)
-            );
-        }
+      function displayDashboard() {
+        // Retrieve registered events
+        const registeredEvents = JSON.parse(
+          localStorage.getItem("registeredEvents") || "[]",
+        );
 
+        // Retrieve favourite events
+        const favouriteEvents = JSON.parse(
+          localStorage.getItem("favouriteEvents") || "[]",
+        );
+
+        // Get current date
+        const today = new Date();
+
+        today.setHours(0, 0, 0, 0);
+
+        // Filter upcoming events
+        const upcomingEvents = registeredEvents.filter((event) => {
+          const eventDate = new Date(event.date);
+
+          return eventDate >= today;
+        });
+
+        // Filter completed events
+        const completedEvents = registeredEvents.filter((event) => {
+          const eventDate = new Date(event.date);
+
+          return eventDate < today;
+        });
 
         // ==========================================
-        // DISPLAY STUDENT DASHBOARD
+        // UPDATE EVENT OVERVIEW
         // ==========================================
 
-        function displayDashboard() {
+        document.getElementById("registered-count").textContent =
+          registeredEvents.length;
 
-            // Retrieve registered events
-            const registeredEvents = JSON.parse(
-                localStorage.getItem("registeredEvents") || "[]"
-            );
+        document.getElementById("favourite-count").textContent =
+          favouriteEvents.length;
 
-            // Retrieve favourite events
-            const favouriteEvents = JSON.parse(
-                localStorage.getItem("favouriteEvents") || "[]"
-            );
+        document.getElementById("completed-count").textContent =
+          completedEvents.length;
 
-            // Get current date
-            const today = new Date();
+        // ==========================================
+        // DISPLAY UPCOMING EVENTS
+        // ==========================================
 
-            today.setHours(0, 0, 0, 0);
+        const container = document.getElementById("upcoming-event-list");
 
+        container.innerHTML = "";
 
-            // Filter upcoming events
-            const upcomingEvents = registeredEvents.filter(event => {
-
-                const eventDate = new Date(event.date);
-
-                return eventDate >= today;
-
-            });
-
-
-            // Filter completed events
-            const completedEvents = registeredEvents.filter(event => {
-
-                const eventDate = new Date(event.date);
-
-                return eventDate < today;
-
-            });
-
-
-            // ==========================================
-            // UPDATE EVENT OVERVIEW
-            // ==========================================
-
-            document.getElementById("registered-count").textContent =
-                registeredEvents.length;
-
-            document.getElementById("favourite-count").textContent =
-                favouriteEvents.length;
-
-            document.getElementById("completed-count").textContent =
-                completedEvents.length;
-
-
-            // ==========================================
-            // DISPLAY UPCOMING EVENTS
-            // ==========================================
-
-            const container =
-                document.getElementById("upcoming-event-list");
-
-            container.innerHTML = "";
-
-
-            // Check if there are upcoming events
-            if (upcomingEvents.length === 0) {
-
-                container.innerHTML = `
+        // Check if there are upcoming events
+        if (upcomingEvents.length === 0) {
+          container.innerHTML = `
                     <tr>
                         <td colspan="3" align="center">
                             No upcoming events.
@@ -214,21 +184,15 @@
                     </tr>
                 `;
 
-                return;
+          return;
+        }
 
-            }
+        // Sort upcoming events by date
+        upcomingEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-
-            // Sort upcoming events by date
-            upcomingEvents.sort((a, b) =>
-                new Date(a.date) - new Date(b.date)
-            );
-
-
-            // Display registered upcoming events
-            upcomingEvents.forEach(function (event) {
-
-                container.innerHTML += `
+        // Display registered upcoming events
+        upcomingEvents.forEach(function (event) {
+          container.innerHTML += `
 
                     <tr>
 
@@ -247,23 +211,17 @@
                     </tr>
 
                 `;
+        });
+      }
 
-            });
+      // Display dashboard when page is opened
+      displayDashboard();
 
-        }
+      // Refresh dashboard when returning to the page
+      window.addEventListener("pageshow", displayDashboard);
 
-
-        // Display dashboard when page is opened
-        displayDashboard();
-
-        // Refresh dashboard when returning to the page
-        window.addEventListener("pageshow", displayDashboard);
-
-        // Update dashboard when Local Storage changes
-        window.addEventListener("storage", displayDashboard);
-
+      // Update dashboard when Local Storage changes
+      window.addEventListener("storage", displayDashboard);
     </script>
-
-</body>
-
+  </body>
 </html>
