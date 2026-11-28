@@ -1,0 +1,2965 @@
+/* ====================================
+   CAMPUSCONNECT - SHARED STYLESHEET
+   ==================================== */
+
+/* GENERAL PAGE DESIGN */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f5fc;
+    color: #30263d;
+    margin: 0;
+    padding: 30px;
+}
+
+/* CAMPUSCONNECT HEADER */
+body>h1 {
+    background: linear-gradient(120deg, #542481, #9264b4);
+    color: white;
+    padding: 25px 30px;
+    margin: -30px -30px 20px;
+    font-size: 30px;
+}
+
+/* HEADINGS */
+h2 {
+    color: #49236e;
+    font-size: 27px;
+    margin-top: 25px;
+}
+
+h3 {
+    color: #67349d;
+    font-size: 19px;
+}
+
+/* NAVIGATION LINKS */
+body>a {
+    display: inline-block;
+    padding: 11px 17px;
+    margin: 5px 3px;
+    background-color: white;
+    color: #67349d;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body>a:hover {
+    background-color: #67349d;
+    color: white;
+}
+
+/* NORMAL LINKS */
+a {
+    color: #67349d;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* HORIZONTAL LINE */
+hr {
+    border: none;
+    border-top: 1px solid #e2d6ed;
+    margin: 20px 0;
+}
+
+/* DATA TABLES */
+table[border="1"] {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    border: 1px solid #e3dbea;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px rgba(75, 35, 110, 0.08);
+}
+
+table[border="1"] th {
+    background-color: #67349d;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    border: 1px solid #e3dbea;
+}
+
+table[border="1"] td {
+    padding: 13px;
+    border: 1px solid #e3dbea;
+}
+
+table[border="1"] tr:hover td {
+    background-color: #f5edfb;
+}
+
+/* FORM TABLES */
+table[border="0"] {
+    background-color: transparent;
+}
+
+table[border="0"] td {
+    padding: 7px;
+}
+
+/* INPUT FIELDS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+    padding: 11px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    background-color: white;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #b58cda;
+    outline-offset: 1px;
+}
+
+/* BUTTONS */
+input[type="button"],
+input[type="submit"],
+button {
+    background-color: #67349d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input[type="button"]:hover,
+input[type="submit"]:hover,
+button:hover {
+    background-color: #50267f;
+}
+
+/* RESET BUTTON */
+input[type="reset"],
+input[value="Reset"] {
+    background-color: #e8e0ef;
+    color: #49236e;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 18px;
+    cursor: pointer;
+}
+
+input[type="reset"]:hover,
+input[value="Reset"]:hover {
+    background-color: #d5c6e3;
+}
+
+/* REVOKE ACCESS BUTTON */
+input[value="Revoke Access"] {
+    background-color: #b83d56;
+    color: white;
+}
+
+input[value="Revoke Access"]:hover {
+    background-color: #922b43;
+}
+
+/* FORM CONTAINERS */
+body>form {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #e8e0ef;
+    border-radius: 8px;
+    max-width: 100%;
+    width: fit-content;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    body>h1 {
+        margin: -15px -15px 20px;
+        padding: 20px;
+    }
+
+    table[border="1"] {
+        font-size: 12px;
+    }
+
+    table[border="1"] th,
+    table[border="1"] td {
+        padding: 8px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+        max-width: 100%;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - LOGIN PAGE
+   ==================================== */
+
+body.login-page {
+    display: grid;
+    grid-template-columns: 38% 62%;
+    grid-template-rows: 1fr auto auto auto auto 1fr;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #faf7fd;
+    font-family: Arial, sans-serif;
+}
+
+/* LEFT PURPLE SECTION */
+body.login-page>h1 {
+    grid-column: 1;
+    grid-row: 1 / 7;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px;
+
+    background: linear-gradient(145deg, #956db5, #60308f);
+    color: white;
+    text-align: center;
+    font-size: 32px;
+}
+
+/* LOGO SYMBOL */
+body.login-page>h1::before {
+    content: "🎓";
+    display: block;
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+/* SYSTEM DESCRIPTION */
+body.login-page>h1::after {
+    content: "A Centralized Event Discovery and Registration System";
+    display: block;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.7;
+    max-width: 230px;
+    margin-top: 12px;
+}
+
+/* RIGHT SECTION HEADING */
+body.login-page>h2 {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: min(460px, 85%);
+    margin: 0 auto 10px;
+
+    color: #17111e;
+    font-size: 40px;
+}
+
+/* SUBTITLE */
+body.login-page>p:first-of-type {
+    grid-column: 2;
+    grid-row: 3;
+
+    width: min(460px, 85%);
+    margin: 0 auto 25px;
+
+    color: #666;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* LOGIN FORM */
+body.login-page>form {
+    grid-column: 2;
+    grid-row: 4;
+
+    width: min(460px, 85%);
+    max-width: none;
+    margin: 0 auto;
+    padding: 25px;
+
+    background-color: white;
+    border: 1px solid #e6dcec;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(80, 40, 120, 0.08);
+}
+
+/* LOGIN FORM TABLE */
+body.login-page form table {
+    width: 100%;
+}
+
+/* FORM LABELS */
+body.login-page form td {
+    padding: 9px 5px;
+    font-size: 14px;
+}
+
+/* TEXT FIELDS */
+body.login-page input[type="text"],
+body.login-page input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+}
+
+/* RADIO BUTTONS */
+body.login-page input[type="radio"] {
+    accent-color: #67349d;
+    cursor: pointer;
+}
+
+/* LOGIN BUTTON */
+body.login-page input[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    margin-top: 15px;
+
+    background-color: #67349d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.login-page input[type="submit"]:hover {
+    background-color: #50267f;
+}
+
+/* REGISTER LINK */
+body.login-page>p:last-of-type {
+    grid-column: 2;
+    grid-row: 5;
+
+    width: min(460px, 85%);
+    margin: 20px auto 0;
+
+    text-align: center;
+    font-size: 14px;
+}
+
+body.login-page>p:last-of-type a {
+    color: #67349d;
+    font-weight: bold;
+}
+
+/* MOBILE SCREEN */
+@media (max-width: 768px) {
+
+    body.login-page {
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto auto auto auto;
+        padding-bottom: 35px;
+    }
+
+    body.login-page>h1 {
+        grid-column: 1;
+        grid-row: 1;
+        min-height: 200px;
+        font-size: 26px;
+    }
+
+    body.login-page>h2 {
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 30px;
+        font-size: 32px;
+    }
+
+    body.login-page>p:first-of-type {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    body.login-page>form {
+        grid-column: 1;
+        grid-row: 4;
+        padding: 15px;
+    }
+
+    body.login-page>p:last-of-type {
+        grid-column: 1;
+        grid-row: 5;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - REGISTER PAGE
+   ==================================== */
+
+body.register-page {
+    display: grid;
+    grid-template-columns: 38% 62%;
+    grid-template-rows: 1fr auto auto auto auto 1fr;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #faf7fd;
+    font-family: Arial, sans-serif;
+}
+
+/* LEFT PURPLE SECTION */
+body.register-page>h1 {
+    grid-column: 1;
+    grid-row: 1 / 7;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px;
+
+    background: linear-gradient(145deg, #956db5, #60308f);
+    color: white;
+    text-align: center;
+    font-size: 32px;
+}
+
+/* LOGO SYMBOL */
+body.register-page>h1::before {
+    content: "🎓";
+    display: block;
+    font-size: 65px;
+    margin-bottom: 15px;
+}
+
+/* SYSTEM DESCRIPTION */
+body.register-page>h1::after {
+    content: "A Centralized Event Discovery and Registration System";
+    display: block;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 1.7;
+    max-width: 230px;
+    margin-top: 12px;
+}
+
+/* CREATE ACCOUNT HEADING */
+body.register-page>h2 {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: min(500px, 88%);
+    margin: 0 auto 10px;
+
+    color: #17111e;
+    font-size: 40px;
+}
+
+/* SUBTITLE */
+body.register-page>p:first-of-type {
+    grid-column: 2;
+    grid-row: 3;
+
+    width: min(500px, 88%);
+    margin: 0 auto 20px;
+
+    color: #666;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* REGISTRATION FORM */
+body.register-page>form {
+    grid-column: 2;
+    grid-row: 4;
+
+    width: min(500px, 88%);
+    max-width: none;
+    margin: 0 auto;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* FORM TABLE LAYOUT */
+body.register-page form table {
+    display: block;
+    width: 100%;
+}
+
+body.register-page form tbody {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* EACH FORM ROW */
+body.register-page form tr {
+    display: flex;
+    flex-direction: column;
+    grid-column: span 2;
+    min-width: 0;
+}
+
+/* FACULTY AND COURSE SIDE BY SIDE */
+body.register-page form tr:nth-child(4),
+body.register-page form tr:nth-child(5) {
+    grid-column: span 1;
+}
+
+/* FORM CELLS */
+body.register-page form td {
+    display: block;
+    width: 100%;
+    padding: 3px 0;
+    font-size: 14px;
+}
+
+/* FIELD LABELS */
+body.register-page form td:first-child {
+    color: #49236e;
+    font-weight: bold;
+}
+
+/* TEXT INPUTS */
+body.register-page input[type="text"],
+body.register-page input[type="email"],
+body.register-page input[type="password"] {
+    width: 100%;
+    height: 44px;
+    padding: 12px;
+
+    background-color: white;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* INPUT FOCUS */
+body.register-page input:focus {
+    outline: 2px solid #b58cda;
+    outline-offset: 1px;
+}
+
+/* REGISTER BUTTON ROW */
+body.register-page form tr:last-child td:first-child:empty {
+    display: none;
+}
+
+/* REGISTER BUTTON */
+body.register-page input[type="submit"] {
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+
+    background-color: #67349d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.register-page input[type="submit"]:hover {
+    background-color: #50267f;
+}
+
+/* CLEAR BUTTON, IF PRESENT */
+body.register-page input[type="reset"] {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* LOGIN LINK */
+body.register-page>p:last-of-type {
+    grid-column: 2;
+    grid-row: 5;
+
+    width: min(500px, 88%);
+    margin: 20px auto 0;
+
+    text-align: center;
+    font-size: 14px;
+}
+
+body.register-page>p:last-of-type a {
+    color: #67349d;
+    font-weight: bold;
+}
+
+/* MOBILE SCREEN */
+@media (max-width: 768px) {
+
+    body.register-page {
+        grid-template-columns: 100%;
+        grid-template-rows: auto auto auto auto auto;
+        padding-bottom: 35px;
+    }
+
+    body.register-page>h1 {
+        grid-column: 1;
+        grid-row: 1;
+        min-height: 190px;
+        font-size: 26px;
+    }
+
+    body.register-page>h2 {
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 30px;
+        font-size: 32px;
+    }
+
+    body.register-page>p:first-of-type {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    body.register-page>form {
+        grid-column: 1;
+        grid-row: 4;
+    }
+
+    body.register-page>p:last-of-type {
+        grid-column: 1;
+        grid-row: 5;
+    }
+}
+
+@media (max-width: 480px) {
+
+    body.register-page form tr:nth-child(4),
+    body.register-page form tr:nth-child(5) {
+        grid-column: span 2;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - ADMIN DASHBOARD
+   ==================================== */
+
+/* ADMIN PAGE BACKGROUND */
+body.admin-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+    padding: 30px;
+    color: #30263d;
+}
+
+/* HEADER */
+body.admin-page>h1 {
+    background: linear-gradient(120deg, #542481, #9264b4);
+    color: white;
+    padding: 28px 35px;
+    margin: -30px -30px 25px;
+    font-size: 30px;
+}
+
+/* NAVIGATION */
+body.admin-page>a {
+    display: inline-block;
+    background-color: white;
+    color: #67349d;
+    padding: 12px 20px;
+    margin: 3px;
+    border-radius: 7px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.admin-page>a:hover {
+    background-color: #67349d;
+    color: white;
+}
+
+/* DIVIDER */
+body.admin-page>hr {
+    border: none;
+    border-top: 1px solid #e3d9ec;
+    margin: 25px 0;
+}
+
+/* SECTION HEADINGS */
+body.admin-page>h2 {
+    color: #49236e;
+    font-size: 28px;
+    margin-bottom: 25px;
+}
+
+body.admin-page>h3 {
+    color: #67349d;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 18px;
+}
+
+/* ====================================
+   SYSTEM OVERVIEW STATISTICS
+   ==================================== */
+
+body.admin-page>table[border="1"]:first-of-type {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 12px 0;
+    box-shadow: none;
+    table-layout: fixed;
+}
+
+/* STATISTIC TITLES */
+body.admin-page>table:first-of-type th {
+    background-color: #eee5f6;
+    color: #67349d;
+    text-align: center;
+    font-size: 15px;
+    padding: 20px;
+    border: 1px solid #e5d9f0;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+/* STATISTIC NUMBERS */
+body.admin-page>table:first-of-type td {
+    background-color: white;
+    color: #67349d;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    padding: 20px;
+    border: 1px solid #e5d9f0;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+
+/* ====================================
+   SEARCH ORGANIZER FORM
+   ==================================== */
+
+body.admin-page>form {
+    background-color: white;
+    padding: 22px;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 100%;
+    box-shadow: 0 3px 12px rgba(75, 35, 110, 0.05);
+}
+
+body.admin-page form table {
+    background-color: transparent;
+}
+
+body.admin-page form td {
+    padding: 8px;
+}
+
+body.admin-page input[type="text"] {
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* SEARCH BUTTON */
+body.admin-page input[value="Search"] {
+    background-color: #67349d;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+body.admin-page input[value="Search"]:hover {
+    background-color: #50267f;
+}
+
+/* RESET BUTTON */
+body.admin-page input[value="Reset"] {
+    background-color: #e8e0ef;
+    color: #49236e;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* ====================================
+   ORGANIZER INFORMATION TABLE
+   ==================================== */
+
+body.admin-page>table[border="1"]:last-of-type {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #e3dbea;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+body.admin-page>table:last-of-type th {
+    background-color: #67349d;
+    color: white;
+    padding: 16px;
+    text-align: left;
+}
+
+body.admin-page>table:last-of-type td {
+    padding: 15px;
+    border: 1px solid #e3dbea;
+}
+
+body.admin-page>table:last-of-type tr:hover td {
+    background-color: #f3ebfa;
+}
+
+/* VIEW BUTTON */
+body.admin-page input[value="View"] {
+    background-color: #67349d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.admin-page input[value="View"]:hover {
+    background-color: #50267f;
+}
+
+/* MOBILE SCREEN */
+@media (max-width: 768px) {
+    body.admin-page {
+        padding: 15px;
+    }
+
+    body.admin-page>h1 {
+        margin: -15px -15px 20px;
+    }
+
+    body.admin-page>table:first-of-type th {
+        font-size: 12px;
+        padding: 12px 5px;
+    }
+
+    body.admin-page>table:first-of-type td {
+        font-size: 24px;
+        padding: 12px 5px;
+    }
+
+    body.admin-page>table:last-of-type {
+        display: block;
+        overflow-x: auto;
+    }
+
+    body.admin-page>form {
+        overflow-x: auto;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - MONITOR EVENTS
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.monitor-events-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* EVENT OVERVIEW CARDS */
+body.monitor-events-page>table[border="1"]:first-of-type {
+    width: 100%;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 12px 0;
+    table-layout: fixed;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* CARD HEADINGS */
+body.monitor-events-page>table:first-of-type th {
+    background-color: #eee5f6;
+    color: #67349d;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e5d9f0;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+/* CARD NUMBERS */
+body.monitor-events-page>table:first-of-type td {
+    background-color: white;
+    color: #67349d;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e5d9f0;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+
+/* SEARCH EVENTS SECTION */
+body.monitor-events-page>form {
+    background-color: white;
+    padding: 22px;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    box-shadow: 0 3px 12px rgba(75, 35, 110, 0.05);
+}
+
+/* EVENT LIST */
+body.monitor-events-page>table[border="1"]:last-of-type {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+/* EVENT TABLE HEADER */
+body.monitor-events-page>table:last-of-type th {
+    background-color: #67349d;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+/* EVENT TABLE DATA */
+body.monitor-events-page>table:last-of-type td {
+    padding: 14px;
+    border: 1px solid #e3dbea;
+}
+
+/* HOVER EFFECT */
+body.monitor-events-page>table:last-of-type tr:hover td {
+    background-color: #f3ebfa;
+}
+
+/* VIEW EVENT BUTTON */
+body.monitor-events-page input[value="View"] {
+    background-color: #67349d;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 18px;
+}
+
+body.monitor-events-page input[value="View"]:hover {
+    background-color: #50267f;
+}
+
+/* MOBILE SCREEN */
+@media (max-width: 768px) {
+    body.monitor-events-page>table:first-of-type th {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+
+    body.monitor-events-page>table:first-of-type td {
+        font-size: 24px;
+        padding: 12px 5px;
+    }
+
+    body.monitor-events-page>table:last-of-type {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* ====================================
+   STUDENT DASHBOARD
+   ==================================== */
+
+body.student-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAVIGATION BAR */
+body.student-page>header {
+    background: linear-gradient(120deg, #542481, #9264b4);
+    padding: 15px 30px;
+}
+
+body.student-page header nav table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+body.student-page header nav td {
+    border: none;
+    padding: 12px;
+}
+
+body.student-page header strong {
+    color: white;
+    font-size: 25px;
+}
+
+body.student-page header nav a {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 6px;
+}
+
+body.student-page header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ACTIVE DASHBOARD LINK */
+body.student-page header nav a[href="student-dashboard.html"] {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* MAIN CONTENT */
+body.student-page main {
+    padding: 35px;
+}
+
+/* DASHBOARD HEADER */
+body.student-page .dashboard-header h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+body.student-page .dashboard-header p {
+    color: #665875;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* ====================================
+   EVENT OVERVIEW CARDS
+   ==================================== */
+
+body.student-page .event-overview table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 12px;
+    table-layout: fixed;
+    background: transparent;
+}
+
+body.student-page .event-overview td {
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    text-align: center;
+    padding: 30px 15px;
+    box-shadow: 0 4px 12px rgba(75, 35, 110, 0.06);
+}
+
+body.student-page .event-overview td:hover {
+    background-color: #f3ebfa;
+}
+
+/* STATISTIC NUMBERS */
+body.student-page .event-overview h2 {
+    color: #67349d;
+    font-size: 38px;
+    margin: 0 0 12px;
+}
+
+/* STATISTIC LABELS */
+body.student-page .event-overview a {
+    color: #67349d;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.student-page .event-overview a:hover {
+    text-decoration: underline;
+}
+
+/* ====================================
+   UPCOMING EVENTS
+   ==================================== */
+
+body.student-page .upcoming-events {
+    margin-top: 35px;
+}
+
+body.student-page .upcoming-events h2 {
+    color: #49236e;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+body.student-page .upcoming-events>a {
+    display: inline-block;
+    color: #67349d;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+body.student-page .upcoming-events>a:hover {
+    text-decoration: underline;
+}
+
+/* UPCOMING EVENT TABLE */
+body.student-page .upcoming-events table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+body.student-page .upcoming-events th {
+    background-color: #67349d;
+    color: white;
+    padding: 16px;
+    text-align: left;
+}
+
+body.student-page .upcoming-events td {
+    padding: 16px;
+    border: 1px solid #e3dbea;
+}
+
+body.student-page .upcoming-events tbody tr:hover td {
+    background-color: #f3ebfa;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+    body.student-page>header {
+        padding: 12px;
+        overflow-x: auto;
+    }
+
+    body.student-page header nav table {
+        min-width: 550px;
+    }
+
+    body.student-page main {
+        padding: 15px;
+    }
+
+    body.student-page .event-overview table,
+    body.student-page .event-overview tbody,
+    body.student-page .event-overview tr,
+    body.student-page .event-overview td {
+        display: block;
+        width: 100%;
+    }
+
+    body.student-page .event-overview table {
+        border-spacing: 0;
+    }
+
+    body.student-page .event-overview td {
+        margin-bottom: 12px;
+    }
+
+    body.student-page .upcoming-events table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - DISCOVER EVENTS
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.student-events-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* PAGE HEADER */
+body.student-events-page .page-header {
+    margin-bottom: 30px;
+}
+
+body.student-events-page .page-header h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+body.student-events-page .page-header p {
+    color: #665875;
+    font-size: 16px;
+}
+
+/* ====================================
+   SEARCH AND FILTER SECTION
+   ==================================== */
+
+body.student-events-page .search-filter {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 3px 12px rgba(75, 35, 110, 0.05);
+}
+
+body.student-events-page .search-filter table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+body.student-events-page .search-filter td {
+    padding: 5px;
+}
+
+/* SEARCH INPUT */
+body.student-events-page input[type="search"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+/* CATEGORY FILTER */
+body.student-events-page .search-filter select {
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    background-color: white;
+}
+
+/* DATE FILTER */
+body.student-events-page input[type="date"] {
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+}
+
+/* SEARCH BUTTON */
+body.student-events-page .search-filter button {
+    background-color: #67349d;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.student-events-page .search-filter button:hover {
+    background-color: #50267f;
+}
+
+/* RESET BUTTON */
+body.student-events-page .search-filter button:last-child {
+    background-color: #e8e0ef;
+    color: #49236e;
+}
+
+/* ====================================
+   EVENT LIST SECTION
+   ==================================== */
+
+body.student-events-page #event-list {
+    margin-top: 25px;
+}
+
+/* TWO-COLUMN EVENT LAYOUT */
+body.student-events-page #event-list>table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 15px;
+    table-layout: fixed;
+    background: transparent;
+}
+
+/* EVENT CARD CONTAINER */
+body.student-events-page #event-container>tr>td {
+    width: 50%;
+    padding: 0;
+    border: none;
+    vertical-align: top;
+}
+
+/* INDIVIDUAL EVENT CARD */
+body.student-events-page .event-card {
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 100%;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+body.student-events-page .event-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(75, 35, 110, 0.13);
+}
+
+/* REMOVE INNER TABLE BORDERS */
+body.student-events-page .event-card table {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-collapse: collapse;
+    box-shadow: none;
+    background: transparent;
+}
+
+body.student-events-page .event-card td {
+    padding: 20px;
+    border: none;
+    background-color: white;
+    vertical-align: top;
+}
+
+/* EVENT IMAGE */
+body.student-events-page .event-card img {
+    display: block;
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    border-radius: 7px;
+    margin-bottom: 18px;
+}
+
+/* EVENT TITLE */
+body.student-events-page .event-card h2 {
+    color: #49236e;
+    font-size: 22px;
+    margin: 12px 0;
+}
+
+/* EVENT INFORMATION */
+body.student-events-page .event-card p {
+    color: #665875;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+/* FREE EVENT TEXT */
+body.student-events-page .event-card strong {
+    color: #67349d;
+    font-weight: bold;
+}
+
+/* VIEW DETAILS BUTTON */
+body.student-events-page .event-card a {
+    display: inline-block;
+    background-color: #67349d;
+    color: white;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.student-events-page .event-card a:hover {
+    background-color: #50267f;
+}
+
+/* NO EVENTS MESSAGE */
+body.student-events-page #no-events {
+    text-align: center;
+    background-color: white;
+    color: #665875;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #e5d9f0;
+}
+
+body.student-events-page #no-events[hidden] {
+    display: none;
+}
+
+/* ====================================
+   MOBILE SCREEN
+   ==================================== */
+
+@media (max-width: 768px) {
+
+    body.student-events-page .search-filter {
+        padding: 15px;
+    }
+
+    body.student-events-page .search-filter tr {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    body.student-events-page .search-filter td {
+        display: block;
+    }
+
+    body.student-events-page #event-list>table,
+    body.student-events-page #event-container,
+    body.student-events-page #event-container>tr,
+    body.student-events-page #event-container>tr>td {
+        display: block;
+        width: 100%;
+    }
+
+    body.student-events-page #event-container>tr>td {
+        margin-bottom: 20px;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - EVENT DETAILS PAGE
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.student-details-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* BACK TO EVENTS LINK */
+body.student-details-page main>p>a {
+    display: inline-block;
+    color: #67349d;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+body.student-details-page main>p>a:hover {
+    text-decoration: underline;
+}
+
+/* ====================================
+   EVENT DETAILS CONTAINER
+   ==================================== */
+
+body.student-details-page #event-details {
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.08);
+}
+
+/* MAIN EVENT TABLE */
+body.student-details-page #event-details>table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+/* IMAGE AND INFORMATION COLUMNS */
+body.student-details-page #event-details>table>tbody>tr:first-child>td {
+    padding: 20px;
+    vertical-align: top;
+}
+
+/* EVENT IMAGE */
+body.student-details-page #event-image {
+    display: block;
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* EVENT TITLE */
+body.student-details-page #event-name {
+    color: #49236e;
+    font-size: 32px;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+/* EVENT CATEGORY */
+body.student-details-page #event-category {
+    color: #67349d;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+/* FREE EVENT LABEL */
+body.student-details-page #event-details strong {
+    color: #67349d;
+}
+
+/* EVENT DESCRIPTION */
+body.student-details-page #event-description {
+    color: #665875;
+    font-size: 15px;
+    line-height: 1.8;
+    margin: 20px 0;
+}
+
+/* ====================================
+   EVENT INFORMATION
+   ==================================== */
+
+/* DATE, LOCATION, TIME, DEADLINE */
+body.student-details-page #event-details table table {
+    width: 100%;
+    background-color: #f8f5fc;
+    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    padding: 12px;
+}
+
+/* INFORMATION CELLS */
+body.student-details-page #event-details table table td {
+    padding: 12px 8px;
+    color: #4b4058;
+    font-size: 14px;
+    border: none;
+}
+
+/* INFORMATION LABELS */
+body.student-details-page #event-details table table strong {
+    color: #49236e;
+    font-weight: bold;
+}
+
+/* ====================================
+   EVENT NOTICE
+   ==================================== */
+
+body.student-details-page #event-notice {
+    background-color: #fff2e5;
+    color: #9a5b18;
+    border: 1px solid #f3d6ae;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+body.student-details-page #event-notice[hidden] {
+    display: none;
+}
+
+/* ====================================
+   EVENT ACTION BUTTONS
+   ==================================== */
+
+/* BUTTON CONTAINER */
+body.student-details-page #event-details>table>tbody>tr:last-child>td {
+    padding: 20px;
+    border-top: 1px solid #e5d9f0;
+}
+
+/* REGISTER BUTTON */
+body.student-details-page #register-button {
+    background-color: #67349d;
+    color: white;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+body.student-details-page #register-button:hover {
+    background-color: #50267f;
+}
+
+/* ADD TO MY INTEREST BUTTON */
+body.student-details-page #interest-button {
+    background-color: white;
+    color: #67349d;
+    padding: 12px 25px;
+    border: 2px solid #67349d;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.student-details-page #interest-button:hover {
+    background-color: #f3ebfa;
+}
+
+/* DISABLED BUTTONS */
+body.student-details-page button:disabled {
+    background-color: #e8e0ef !important;
+    color: #867395 !important;
+    border-color: #d8cbe3 !important;
+    cursor: not-allowed;
+}
+
+/* ====================================
+   MOBILE SCREEN
+   ==================================== */
+
+@media (max-width: 768px) {
+
+    body.student-details-page main {
+        padding: 15px;
+    }
+
+    body.student-details-page #event-details {
+        padding: 12px;
+    }
+
+    /* STACK IMAGE AND INFORMATION */
+    body.student-details-page #event-details>table>tbody>tr:first-child>td {
+        display: block;
+        width: 100%;
+        padding: 12px;
+    }
+
+    body.student-details-page #event-image {
+        height: 230px;
+    }
+
+    body.student-details-page #event-name {
+        font-size: 25px;
+    }
+
+    /* STACK ACTION BUTTONS */
+    body.student-details-page #register-button,
+    body.student-details-page #interest-button {
+        display: block;
+        width: 100%;
+        margin: 8px 0;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - REGISTERED EVENT HISTORY
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.student-tickets-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* BACK TO DASHBOARD LINK */
+body.student-tickets-page main>p>a {
+    display: inline-block;
+    color: #67349d;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+body.student-tickets-page main>p>a:hover {
+    text-decoration: underline;
+}
+
+/* ====================================
+   PAGE HEADER
+   ==================================== */
+
+body.student-tickets-page .page-header {
+    margin-bottom: 25px;
+}
+
+body.student-tickets-page .page-header h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+body.student-tickets-page .page-header p {
+    color: #665875;
+    font-size: 16px;
+}
+
+/* ====================================
+   EVENT FILTER TABS
+   ==================================== */
+
+body.student-tickets-page .event-filter {
+    margin-bottom: 25px;
+}
+
+/* FILTER TABLE */
+body.student-tickets-page .event-filter table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 8px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+/* INDIVIDUAL FILTER BOXES */
+body.student-tickets-page .event-filter td {
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 8px;
+    padding: 0;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(75, 35, 110, 0.05);
+}
+
+/* FILTER LINKS */
+body.student-tickets-page .event-filter a {
+    display: block;
+    color: #67349d;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 18px;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+/* HOVER EFFECT */
+body.student-tickets-page .event-filter a:hover {
+    background-color: #f3ebfa;
+}
+
+/* ====================================
+   REGISTERED EVENTS TABLE
+   ==================================== */
+
+body.student-tickets-page .registered-events {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+/* TABLE CONTAINER */
+body.student-tickets-page .registered-events table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+/* TABLE HEADINGS */
+body.student-tickets-page .registered-events th {
+    background-color: #67349d;
+    color: white;
+    font-size: 15px;
+    padding: 18px;
+    text-align: left;
+}
+
+/* TABLE DATA */
+body.student-tickets-page .registered-events td {
+    padding: 18px;
+    color: #4b4058;
+    font-size: 14px;
+    border: 1px solid #e3dbea;
+}
+
+/* HOVER EFFECT */
+body.student-tickets-page .registered-events tbody tr:hover td {
+    background-color: #f3ebfa;
+}
+
+/* EVENT NAME */
+body.student-tickets-page .registered-events td:first-child {
+    font-weight: bold;
+    color: #49236e;
+}
+
+/* STATUS COLUMN */
+body.student-tickets-page .registered-events td:nth-child(3) {
+    color: #67349d;
+    font-weight: bold;
+}
+
+/* ====================================
+   VIEW EVENT BUTTON
+   ==================================== */
+
+body.student-tickets-page .registered-events td a {
+    display: inline-block;
+    background-color: #67349d;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.student-tickets-page .registered-events td a:hover {
+    background-color: #50267f;
+}
+
+/* ====================================
+   MOBILE SCREEN
+   ==================================== */
+
+@media (max-width: 768px) {
+
+    body.student-tickets-page .page-header h1 {
+        font-size: 25px;
+    }
+
+    body.student-tickets-page .event-filter a {
+        font-size: 12px;
+        padding: 13px 5px;
+    }
+
+    body.student-tickets-page .registered-events table {
+        min-width: 600px;
+    }
+
+    body.student-tickets-page .registered-events th,
+    body.student-tickets-page .registered-events td {
+        padding: 12px;
+        font-size: 12px;
+    }
+}
+/* ====================================
+   CAMPUSCONNECT - MY INTEREST PAGE
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.student-favourites-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* ACTIVE NAVIGATION LINK */
+body.student-favourites-page header nav a[href="student-dashboard.html"] {
+    background-color: transparent;
+}
+
+body.student-favourites-page header nav a[href="my-favourite.html"] {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ====================================
+   PAGE HEADER
+   ==================================== */
+
+body.student-favourites-page #favourite-events {
+    margin-top: 10px;
+}
+
+body.student-favourites-page #favourite-events>h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+body.student-favourites-page #favourite-events>p {
+    color: #665875;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+/* ====================================
+   FAVOURITE EVENT LIST
+   ==================================== */
+
+body.student-favourites-page #favourite-list {
+    width: 100%;
+}
+
+/* INDIVIDUAL EVENT CONTAINER */
+body.student-favourites-page #favourite-list>table {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+/* EVENT INFORMATION CELLS */
+body.student-favourites-page #favourite-list td {
+    padding: 25px;
+    border: none;
+    vertical-align: middle;
+}
+
+/* EVENT CARD HOVER */
+body.student-favourites-page #favourite-list>table:hover {
+    box-shadow: 0 6px 20px rgba(75, 35, 110, 0.13);
+}
+
+/* EVENT NAME */
+body.student-favourites-page #favourite-list h3 {
+    color: #49236e;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+/* EVENT DATE AND LOCATION */
+body.student-favourites-page #favourite-list td p {
+    color: #665875;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/* ====================================
+   VIEW DETAILS BUTTON
+   ==================================== */
+
+body.student-favourites-page #favourite-list td a {
+    display: inline-block;
+    background-color: #67349d;
+    color: white;
+    padding: 11px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.student-favourites-page #favourite-list td a:hover {
+    background-color: #50267f;
+}
+
+/* ====================================
+   REMOVE BUTTON
+   ==================================== */
+
+body.student-favourites-page #favourite-list button {
+    background-color: #b83d56;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.student-favourites-page #favourite-list button:hover {
+    background-color: #922b43;
+}
+
+/* HIDE EXTRA LINE BREAKS */
+body.student-favourites-page #favourite-list>br {
+    display: none;
+}
+
+/* ====================================
+   EMPTY FAVOURITES MESSAGE
+   ==================================== */
+
+body.student-favourites-page #favourite-list>p {
+    background-color: white;
+    color: #665875;
+    text-align: center;
+    padding: 45px 20px;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+/* ====================================
+   MOBILE SCREEN
+   ==================================== */
+
+@media (max-width: 768px) {
+
+    body.student-favourites-page #favourite-events>h1 {
+        font-size: 25px;
+    }
+
+    body.student-favourites-page #favourite-list>table {
+        display: block;
+    }
+
+    body.student-favourites-page #favourite-list tbody,
+    body.student-favourites-page #favourite-list tr {
+        display: block;
+    }
+
+    body.student-favourites-page #favourite-list td {
+        display: block;
+        width: 100%;
+        padding: 18px;
+    }
+
+    body.student-favourites-page #favourite-list td:last-child {
+        text-align: left;
+        padding-top: 0;
+    }
+
+    body.student-favourites-page #favourite-list button {
+        width: 100%;
+    }
+}
+/* ====================================
+   CAMPUSCONNECT - ORGANIZER DASHBOARD
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.organizer-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #30263d;
+}
+
+/* ====================================
+   ORGANIZER NAVIGATION BAR
+   ==================================== */
+
+body.organizer-page>header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    background: linear-gradient(120deg, #542481, #9264b4);
+    padding: 20px 35px;
+}
+
+/* CAMPUSCONNECT LOGO TEXT */
+body.organizer-page header h2 {
+    color: white;
+    font-size: 25px;
+    margin: 0;
+}
+
+/* NAVIGATION LINKS */
+body.organizer-page header nav {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+body.organizer-page header nav a {
+    display: inline-block;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 11px 16px;
+    border-radius: 6px;
+}
+
+body.organizer-page header nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* REMOVE HEADER LINE */
+body.organizer-page header hr {
+    display: none;
+}
+
+/* ====================================
+   MAIN CONTENT
+   ==================================== */
+
+body.organizer-page main {
+    padding: 35px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* DASHBOARD TITLE */
+body.organizer-dashboard-page main>h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* WELCOME MESSAGE */
+body.organizer-dashboard-page main>p {
+    color: #665875;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+}
+
+/* SECTION HEADINGS */
+body.organizer-dashboard-page section h2 {
+    color: #49236e;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ====================================
+   EVENT OVERVIEW STATISTICS
+   ==================================== */
+
+body.organizer-dashboard-page section:first-of-type table {
+    width: 100%;
+    border: none;
+    border-collapse: separate;
+    border-spacing: 12px 0;
+    table-layout: fixed;
+    background: transparent;
+    box-shadow: none;
+}
+
+/* STATISTIC CARD TITLES */
+body.organizer-dashboard-page section:first-of-type th {
+    background-color: #eee5f6;
+    color: #67349d;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #e5d9f0;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+}
+
+/* STATISTIC CARD NUMBERS */
+body.organizer-dashboard-page section:first-of-type td {
+    background-color: white;
+    color: #67349d;
+    font-size: 38px;
+    font-weight: bold;
+    text-align: center;
+    padding: 25px;
+    border: 1px solid #e5d9f0;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+}
+
+/* ====================================
+   QUICK ACTIONS
+   ==================================== */
+
+body.organizer-dashboard-page section:last-of-type {
+    margin-top: 30px;
+}
+
+/* QUICK ACTION CONTAINER */
+body.organizer-dashboard-page section:last-of-type ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* QUICK ACTION CARDS */
+body.organizer-dashboard-page section:last-of-type li {
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(75, 35, 110, 0.06);
+    overflow: hidden;
+}
+
+/* QUICK ACTION LINKS */
+body.organizer-dashboard-page section:last-of-type li a {
+    display: block;
+    color: #67349d;
+    padding: 30px 15px;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* HOVER EFFECT */
+body.organizer-dashboard-page section:last-of-type li:hover {
+    background-color: #67349d;
+}
+
+body.organizer-dashboard-page section:last-of-type li:hover a {
+    color: white;
+}
+
+/* ACTIVE DASHBOARD LINK */
+body.organizer-dashboard-page header nav a[href="organizer-dashboard.html"] {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ====================================
+   MOBILE SCREEN
+   ==================================== */
+
+@media (max-width: 768px) {
+
+    body.organizer-page>header {
+        padding: 20px;
+    }
+
+    body.organizer-page main {
+        padding: 15px;
+    }
+
+    body.organizer-dashboard-page section:first-of-type table {
+        border-spacing: 4px 0;
+    }
+
+    body.organizer-dashboard-page section:first-of-type th {
+        font-size: 12px;
+        padding: 12px 5px;
+    }
+
+    body.organizer-dashboard-page section:first-of-type td {
+        font-size: 25px;
+        padding: 15px 5px;
+    }
+
+    body.organizer-dashboard-page section:last-of-type ul {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT - MANAGE EVENTS
+   ==================================== */
+
+/* PAGE BACKGROUND */
+body.organizer-manage-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* ACTIVE NAVIGATION LINK */
+body.organizer-manage-page header nav a[href="manage-events.html"] {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* PAGE HEADING */
+body.organizer-manage-page main>h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* PAGE SUBTITLE */
+body.organizer-manage-page main>p:first-of-type {
+    color: #665875;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+/* CREATE EVENT BUTTON */
+body.organizer-manage-page .create-event-btn {
+    display: inline-block;
+    background-color: #67349d;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 7px;
+    font-size: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+body.organizer-manage-page .create-event-btn:hover {
+    background-color: #50267f;
+}
+
+/* ====================================
+   SEARCH AND FILTER
+   ==================================== */
+
+body.organizer-manage-page .event-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 25px;
+
+    box-shadow: 0 3px 12px rgba(75, 35, 110, 0.05);
+}
+
+/* SEARCH INPUT */
+body.organizer-manage-page #searchInput {
+    flex: 1;
+    min-width: 180px;
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* CATEGORY AND STATUS DROPDOWNS */
+body.organizer-manage-page .event-filters select {
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+}
+
+/* SEARCH BUTTON */
+body.organizer-manage-page .event-filters button {
+    background-color: #67349d;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.organizer-manage-page .event-filters button:hover {
+    background-color: #50267f;
+}
+
+/* RESET BUTTON */
+body.organizer-manage-page .event-filters button[onclick="resetFilters()"] {
+    background-color: #e8e0ef;
+    color: #49236e;
+}
+
+body.organizer-manage-page .event-filters button[onclick="resetFilters()"]:hover {
+    background-color: #d5c6e3;
+}
+
+/* ====================================
+   MANAGE EVENTS TABLE
+   ==================================== */
+
+body.organizer-manage-page #eventsTable {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+/* TABLE HEADER */
+body.organizer-manage-page #eventsTable th {
+    background-color: #67349d;
+    color: white;
+    padding: 16px;
+    font-size: 14px;
+    text-align: left;
+}
+
+/* TABLE DATA */
+body.organizer-manage-page #eventsTable td {
+    padding: 16px;
+    color: #4b4058;
+    font-size: 14px;
+    border: 1px solid #e3dbea;
+}
+
+/* EVENT TITLE */
+body.organizer-manage-page #eventsTable td:first-child {
+    color: #49236e;
+    font-weight: bold;
+}
+
+/* STATUS */
+body.organizer-manage-page #eventsTable td:nth-child(5) {
+    color: #67349d;
+    font-weight: bold;
+}
+
+/* ROW HOVER */
+body.organizer-manage-page #eventsTable tbody tr:hover td {
+    background-color: #f3ebfa;
+}
+
+/* ====================================
+   EVENT ACTIONS
+   ==================================== */
+
+/* VIEW PARTICIPANTS AND EDIT */
+body.organizer-manage-page #eventsTable td a {
+    color: #67349d;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.organizer-manage-page #eventsTable td a:hover {
+    text-decoration: underline;
+}
+
+/* CANCEL BUTTON */
+body.organizer-manage-page #eventsTable button {
+    background-color: #b83d56;
+    color: white;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 4px;
+}
+
+body.organizer-manage-page #eventsTable button:hover {
+    background-color: #922b43;
+}
+
+body.organizer-manage-page #eventsTable button:disabled {
+    background-color: #e8e0ef;
+    color: #867395;
+    cursor: not-allowed;
+}
+
+/* ====================================
+   MOBILE SCREEN
+   ==================================== */
+
+@media (max-width: 768px) {
+
+    body.organizer-manage-page .event-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    body.organizer-manage-page #searchInput {
+        width: 100%;
+        flex: auto;
+    }
+
+    body.organizer-manage-page .event-filters select,
+    body.organizer-manage-page .event-filters button {
+        width: 100%;
+    }
+
+    body.organizer-manage-page main {
+        overflow-x: auto;
+    }
+
+    body.organizer-manage-page #eventsTable {
+        min-width: 850px;
+    }
+}
+/* ====================================
+   CAMPUSCONNECT - CREATE / EDIT EVENT
+   ==================================== */
+
+body.organizer-form-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* PAGE CONTENT */
+body.organizer-form-page main {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 35px;
+}
+
+/* PAGE TITLE */
+body.organizer-form-page main>h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+/* FREE EVENT NOTICE */
+body.organizer-form-page .form-note {
+    color: #665875;
+    font-size: 15px;
+    margin-bottom: 25px;
+}
+
+/* FORM CONTAINER */
+body.organizer-form-page .event-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 12px;
+    padding: 30px;
+
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+/* FORM GROUPS */
+body.organizer-form-page .event-form p {
+    margin: 0;
+}
+
+/* FULL WIDTH FIELDS */
+body.organizer-form-page .event-form .full-width,
+body.organizer-form-page .event-form .form-actions {
+    grid-column: 1 / -1;
+}
+
+/* LABELS */
+body.organizer-form-page .event-form label {
+    display: block;
+    color: #49236e;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 9px;
+}
+
+/* INPUTS */
+body.organizer-form-page .event-form input,
+body.organizer-form-page .event-form select,
+body.organizer-form-page .event-form textarea {
+    width: 100%;
+    padding: 12px;
+
+    background-color: white;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* DESCRIPTION */
+body.organizer-form-page .event-form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+/* FOCUS */
+body.organizer-form-page .event-form input:focus,
+body.organizer-form-page .event-form select:focus,
+body.organizer-form-page .event-form textarea:focus {
+    outline: 2px solid #b58cda;
+    outline-offset: 1px;
+}
+
+/* ACTION BUTTONS */
+body.organizer-form-page .form-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* CREATE / SAVE BUTTON */
+body.organizer-form-page .event-form button {
+    width: auto;
+    background-color: #67349d;
+    color: white;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.organizer-form-page .event-form button:hover {
+    background-color: #50267f;
+}
+
+/* CANCEL LINK */
+body.organizer-form-page .cancel-form-btn {
+    display: inline-block;
+    background-color: #e8e0ef;
+    color: #49236e;
+    padding: 13px 25px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+body.organizer-form-page .cancel-form-btn:hover {
+    background-color: #d5c6e3;
+}
+
+/* MOBILE SCREEN */
+@media (max-width: 768px) {
+    body.organizer-form-page main {
+        padding: 15px;
+    }
+
+    body.organizer-form-page .event-form {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    body.organizer-form-page .event-form .full-width,
+    body.organizer-form-page .event-form .form-actions {
+        grid-column: 1;
+    }
+}
+/* ====================================
+   CAMPUSCONNECT - ORGANIZER ATTENDANCE
+   ==================================== */
+
+body.organizer-attendance-page {
+    background-color: #f8f5fc;
+    min-height: 100vh;
+}
+
+/* ACTIVE NAVIGATION */
+body.organizer-attendance-page header nav a[href="attendance.html"] {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* PAGE TITLE */
+body.organizer-attendance-page main>h1 {
+    color: #49236e;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+body.organizer-attendance-page main>p {
+    color: #665875;
+    font-size: 15px;
+    margin-bottom: 30px;
+}
+
+/* ====================================
+   SELECT EVENT SECTION
+   ==================================== */
+
+body.organizer-attendance-page .attendance-event-info {
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 12px rgba(75, 35, 110, 0.05);
+}
+
+body.organizer-attendance-page .attendance-event-info label {
+    color: #49236e;
+    display: block;
+    margin-bottom: 10px;
+}
+
+body.organizer-attendance-page #eventSelect {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    background-color: white;
+}
+
+body.organizer-attendance-page .attendance-event-info h2 {
+    color: #49236e;
+    font-size: 23px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+body.organizer-attendance-page .attendance-event-info p {
+    color: #665875;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ====================================
+   ATTENDANCE OVERVIEW BUTTONS
+   ==================================== */
+
+body.organizer-attendance-page .attendance-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+body.organizer-attendance-page .attendance-tabs button {
+    background-color: white;
+    color: #67349d;
+    border: 1px solid #e5d9f0;
+    border-radius: 9px;
+    padding: 20px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+body.organizer-attendance-page .attendance-tabs button:hover {
+    background-color: #f3ebfa;
+}
+
+body.organizer-attendance-page .attendance-tabs button.active {
+    background-color: #67349d;
+    color: white;
+    border-color: #67349d;
+}
+
+/* ====================================
+   SEARCH AND FILTER
+   ==================================== */
+
+body.organizer-attendance-page .attendance-filters {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+
+    background-color: white;
+    border: 1px solid #e5d9f0;
+    border-radius: 10px;
+    padding: 22px;
+    margin-bottom: 25px;
+}
+
+body.organizer-attendance-page #searchInput {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+}
+
+body.organizer-attendance-page #statusDropdown {
+    padding: 12px;
+    border: 1px solid #cfc4d9;
+    border-radius: 6px;
+    background-color: white;
+}
+
+/* ====================================
+   PARTICIPANT TABLE
+   ==================================== */
+
+body.organizer-attendance-page #participantTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(75, 35, 110, 0.07);
+}
+
+body.organizer-attendance-page #participantTable th {
+    background-color: #67349d;
+    color: white;
+    padding: 16px;
+    font-size: 14px;
+    text-align: left;
+}
+
+body.organizer-attendance-page #participantTable td {
+    padding: 15px;
+    color: #4b4058;
+    font-size: 14px;
+    border: 1px solid #e3dbea;
+}
+
+body.organizer-attendance-page #participantTable tbody tr:hover td {
+    background-color: #f3ebfa;
+}
+
+/* ATTENDANCE STATUS */
+body.organizer-attendance-page .attendance-status {
+    font-weight: bold;
+}
+
+body.organizer-attendance-page .attendance-status.present {
+    color: #27815d !important;
+}
+
+body.organizer-attendance-page .attendance-status.absent {
+    color: #b83d56 !important;
+}
+
+body.organizer-attendance-page .attendance-status.registered {
+    color: #67349d !important;
+}
+
+/* ====================================
+   ATTENDANCE ACTION BUTTONS
+   ==================================== */
+
+body.organizer-attendance-page #participantTable button {
+    padding: 9px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 3px;
+}
+
+/* MARK PRESENT */
+body.organizer-attendance-page #participantTable .present-btn {
+    background-color: #27815d;
+    color: white;
+}
+
+body.organizer-attendance-page #participantTable .present-btn:hover {
+    background-color: #1d6849;
+}
+
+/* MARK ABSENT */
+body.organizer-attendance-page #participantTable .absent-btn {
+    background-color: #b83d56;
+    color: white;
+}
+
+body.organizer-attendance-page #participantTable .absent-btn:hover {
+    background-color: #922b43;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 768px) {
+
+    body.organizer-attendance-page .attendance-tabs {
+        grid-template-columns: 1fr;
+    }
+
+    body.organizer-attendance-page .attendance-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    body.organizer-attendance-page #searchInput {
+        width: 100%;
+        flex: auto;
+    }
+
+    body.organizer-attendance-page #statusDropdown {
+        width: 100%;
+    }
+
+    body.organizer-attendance-page main {
+        overflow-x: auto;
+    }
+
+    body.organizer-attendance-page #participantTable {
+        min-width: 850px;
+    }
+}
+
+/* ====================================
+   CAMPUSCONNECT LOGO - ALL INTERFACES
+   Student | Organizer | System Admin
+   ==================================== */
+
+.brand,
+.brand-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* SAME LOGO SIZE ON ALL PAGES */
+.brand img,
+.brand-heading img {
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
+/* REMOVE EXTRA HEADING SPACING */
+.brand h1,
+.brand h2,
+.brand strong,
+.brand-heading h1,
+.brand-heading h2 {
+    margin: 0;
+}
+
+/* KEEP LOGO AND TEXT ALIGNED */
+.brand,
+.brand-heading {
+    justify-content: flex-start;
+}
+
+/* REGISTER PAGE - REPLACE GRADUATION CAP WITH LOGO */
+
+/* Hide the existing graduation cap */
+body.register-page>h1::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Display the CampusConnect logo */
+body.register-page>h1 .auth-logo {
+    display: block;
+    width: 130px;
+    height: 130px;
+    max-width: 130px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+}
+
+/* Keep the logo and text centered */
+body.register-page>h1 {
+    text-align: center;
+}
+
+/* LOGIN PAGE - REPLACE GRADUATION CAP WITH LOGO */
+
+/* Hide the original graduation cap */
+body.login-page>h1::before {
+    content: none !important;
+    display: none !important;
+}
+
+/* Display CampusConnect logo */
+body.login-page>h1 .auth-logo {
+    display: block;
+    width: 130px;
+    height: 130px;
+    max-width: 130px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+}
+
+/* Center logo and CampusConnect text */
+body.login-page>h1 {
+    text-align: center;
+}

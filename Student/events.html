@@ -1,203 +1,193 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Discover Events | CampusConnect</title>
-</head>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<body>
-
+  <body class="student-page student-events-page">
     <!-- Navigation Bar -->
     <header>
-        <nav>
-            <table width="100%" cellpadding="10">
-                <tr>
-                    <td width="45%">
-                        <strong>CampusConnect</strong>
-                    </td>
+      <nav>
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td width="45%">
+              <div class="brand">
+                <img
+                  src="../images/logo.png"
+                  alt="CampusConnect Logo"
+                  class="logo"
+                />
+                <strong>CampusConnect</strong>
+              </div>
+            </td>
 
-                    <td align="center">
-                        <a href="events.html">Explore Events</a>
-                    </td>
+            <td align="center">
+              <a href="events.html">Explore Events</a>
+            </td>
 
-                    <td align="center">
-                        <a href="my-favourite.html">My Interest</a>
-                    </td>
+            <td align="center">
+              <a href="my-favourite.html">My Interest</a>
+            </td>
 
-                    <td align="center">
-                        <a href="student-dashboard.html">My Dashboard</a>
-                    </td>
+            <td align="center">
+              <a href="student-dashboard.html">My Dashboard</a>
+            </td>
 
-                    <td align="right">
-                        <a href="index.html" title="Log Out">👤</a>
-                    </td>
-                </tr>
-            </table>
-        </nav>
+            <td align="right">
+              <a href="index.html" title="Log Out">Log Out</a>
+            </td>
+          </tr>
+        </table>
+      </nav>
     </header>
 
     <main>
+      <!-- Page Header -->
+      <section class="page-header">
+        <h1>Discover Campus Events</h1>
+        <p>Register as a student to start discovering campus events</p>
+      </section>
 
-        <!-- Page Header -->
-        <section class="page-header">
-            <h1>Discover Campus Events</h1>
-            <p>Register as a student to start discovering campus events</p>
-        </section>
+      <!-- Search and Filter -->
+      <section class="search-filter">
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td>
+              <input
+                type="search"
+                id="search-event"
+                placeholder="Search Events"
+                size="50"
+                oninput="filterEvents()"
+              />
+            </td>
 
-        <!-- Search and Filter -->
-        <section class="search-filter">
+            <td>
+              <button type="button" onclick="filterEvents()">Search</button>
+            </td>
 
-            <table width="100%" cellpadding="10">
-                <tr>
-                    <td>
-                        <input type="search"
-                            id="search-event"
-                            placeholder="Search Events"
-                            size="50"
-                            oninput="filterEvents()">
-                    </td>
+            <td>
+              <select id="category" onchange="filterEvents()">
+                <option value="">All Categories</option>
+                <option value="seminar">Seminar</option>
+                <option value="workshop">Workshop</option>
+                <option value="talk">Talk</option>
+                <option value="sports">Sports</option>
+                <option value="volunteer">Volunteer</option>
+                <option value="competition">Competition</option>
+              </select>
+            </td>
 
-                    <td>
-                        <button type="button" onclick="filterEvents()">
-                            Search
-                        </button>
-                    </td>
+            <td>
+              <input type="date" id="event-date" onchange="filterEvents()" />
+            </td>
 
-                    <td>
-                        <select id="category" onchange="filterEvents()">
-                            <option value="">All Categories</option>
-                            <option value="seminar">Seminar</option>
-                            <option value="workshop">Workshop</option>
-                            <option value="talk">Talk</option>
-                            <option value="sports">Sports</option>
-                            <option value="volunteer">Volunteer</option>
-                            <option value="competition">Competition</option>
-                        </select>
-                    </td>
+            <td>
+              <button type="button" onclick="resetFilter()">Reset</button>
+            </td>
+          </tr>
+        </table>
+      </section>
 
-                    <td>
-                        <input type="date"
-                            id="event-date"
-                            onchange="filterEvents()">
-                    </td>
+      <!-- Event Listing -->
+      <section id="event-list">
+        <table width="100%" cellpadding="15" cellspacing="15">
+          <tbody id="event-container">
+            <!-- Events will be displayed here -->
+          </tbody>
+        </table>
 
-                    <td>
-                        <button type="button" onclick="resetFilter()">
-                            Reset
-                        </button>
-                    </td>
-                </tr>
-            </table>
-
-        </section>
-
-        <!-- Event Listing -->
-        <section id="event-list">
-
-            <table width="100%" cellpadding="15" cellspacing="15">
-                <tbody id="event-container">
-
-                    <!-- Events will be displayed here -->
-
-                </tbody>
-            </table>
-
-            <p id="no-events" hidden>No events found.</p>
-
-        </section>
-
+        <p id="no-events" hidden>No events found.</p>
+      </section>
     </main>
 
     <script>
+      // Dummy event data for storyboard
+      const events = [
+        {
+          id: 1,
+          name: "Leadership Seminar",
+          category: "Seminar",
+          date: "2026-11-18",
+          location: "UiTM Shah Alam",
+          image: "images/leadership.jpg",
+        },
+        {
+          id: 2,
+          name: "AI Workshop",
+          category: "Workshop",
+          date: "2026-12-21",
+          location: "UiTM Shah Alam",
+          image: "images/ai-workshop.jpg",
+        },
+        {
+          id: 3,
+          name: "Career Talk",
+          category: "Talk",
+          date: "2026-12-10",
+          location: "UiTM Shah Alam",
+          image: "images/career-talk.jpg",
+        },
+        {
+          id: 4,
+          name: "Campus Fun Run",
+          category: "Sports",
+          date: "2026-12-15",
+          location: "UiTM Shah Alam",
+          image: "images/fun-run.jpg",
+        },
+        {
+          id: 5,
+          name: "Community Volunteer Programme",
+          category: "Volunteer",
+          date: "2026-12-28",
+          location: "UiTM Shah Alam",
+          image: "images/volunteer.jpg",
+        },
+        {
+          id: 6,
+          name: "Coding Competition",
+          category: "Competition",
+          date: "2026-12-30",
+          location: "UiTM Shah Alam",
+          image: "images/coding.jpg",
+        },
+      ];
 
-        // Dummy event data for storyboard
-        const events = [
-            {
-                id: 1,
-                name: "Leadership Seminar",
-                category: "Seminar",
-                date: "2026-11-18",
-                location: "UiTM Shah Alam",
-                image: "images/leadership.jpg"
-            },
-            {
-                id: 2,
-                name: "AI Workshop",
-                category: "Workshop",
-                date: "2026-12-21",
-                location: "UiTM Shah Alam",
-                image: "images/ai-workshop.jpg"
-            },
-            {
-                id: 3,
-                name: "Career Talk",
-                category: "Talk",
-                date: "2026-12-10",
-                location: "UiTM Shah Alam",
-                image: "images/career-talk.jpg"
-            },
-            {
-                id: 4,
-                name: "Campus Fun Run",
-                category: "Sports",
-                date: "2026-12-15",
-                location: "UiTM Shah Alam",
-                image: "images/fun-run.jpg"
-            },
-            {
-                id: 5,
-                name: "Community Volunteer Programme",
-                category: "Volunteer",
-                date: "2026-12-28",
-                location: "UiTM Shah Alam",
-                image: "images/volunteer.jpg"
-            },
-            {
-                id: 6,
-                name: "Coding Competition",
-                category: "Competition",
-                date: "2026-12-30",
-                location: "UiTM Shah Alam",
-                image: "images/coding.jpg"
-            }
-        ];
+      // Display events
+      function displayEvents(eventList) {
+        const container = document.getElementById("event-container");
 
-        // Display events
-        function displayEvents(eventList) {
+        container.innerHTML = "";
 
-            const container = document.getElementById("event-container");
+        document.getElementById("no-events").hidden = eventList.length !== 0;
 
-            container.innerHTML = "";
+        let row;
 
-            document.getElementById("no-events").hidden =
-                eventList.length !== 0;
+        eventList.forEach(function (event, index) {
+          // Create a new row for every two events
+          if (index % 2 === 0) {
+            row = document.createElement("tr");
+            container.appendChild(row);
+          }
 
-            let row;
+          const card = document.createElement("td");
 
-            eventList.forEach(function (event, index) {
+          card.width = "50%";
+          card.vAlign = "top";
 
-                // Create a new row for every two events
-                if (index % 2 === 0) {
-                    row = document.createElement("tr");
-                    container.appendChild(row);
-                }
+          const formattedDate = new Date(
+            event.date + "T00:00:00",
+          ).toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
 
-                const card = document.createElement("td");
-
-                card.width = "50%";
-                card.vAlign = "top";
-
-                const formattedDate = new Date(
-                    event.date + "T00:00:00"
-                ).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                });
-
-                card.innerHTML = `
+          card.innerHTML = `
                     <article class="event-card">
 
                         <table border="1" width="100%" cellpadding="15">
@@ -235,59 +225,48 @@
                     </article>
                 `;
 
-                row.appendChild(card);
+          row.appendChild(card);
+        });
+      }
 
-            });
-        }
+      // Search and filter events
+      function filterEvents() {
+        const search = document
+          .getElementById("search-event")
+          .value.toLowerCase()
+          .trim();
 
-        // Search and filter events
-        function filterEvents() {
+        const category = document.getElementById("category").value;
 
-            const search = document
-                .getElementById("search-event")
-                .value.toLowerCase().trim();
+        const date = document.getElementById("event-date").value;
 
-            const category = document
-                .getElementById("category").value;
+        const filteredEvents = events.filter(function (event) {
+          const matchSearch =
+            event.name.toLowerCase().includes(search) ||
+            event.location.toLowerCase().includes(search);
 
-            const date = document
-                .getElementById("event-date").value;
+          const matchCategory =
+            category === "" || event.category.toLowerCase() === category;
 
-            const filteredEvents = events.filter(function (event) {
+          const matchDate = date === "" || event.date === date;
 
-                const matchSearch =
-                    event.name.toLowerCase().includes(search) ||
-                    event.location.toLowerCase().includes(search);
+          return matchSearch && matchCategory && matchDate;
+        });
 
-                const matchCategory =
-                    category === "" ||
-                    event.category.toLowerCase() === category;
+        displayEvents(filteredEvents);
+      }
 
-                const matchDate =
-                    date === "" || event.date === date;
+      // Reset search and filter
+      function resetFilter() {
+        document.getElementById("search-event").value = "";
+        document.getElementById("category").value = "";
+        document.getElementById("event-date").value = "";
 
-                return matchSearch && matchCategory && matchDate;
-
-            });
-
-            displayEvents(filteredEvents);
-        }
-
-        // Reset search and filter
-        function resetFilter() {
-
-            document.getElementById("search-event").value = "";
-            document.getElementById("category").value = "";
-            document.getElementById("event-date").value = "";
-
-            displayEvents(events);
-        }
-
-        // Display all events when page is opened
         displayEvents(events);
+      }
 
+      // Display all events when page is opened
+      displayEvents(events);
     </script>
-
-</body>
-
+  </body>
 </html>

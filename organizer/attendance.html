@@ -1,144 +1,518 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Participants &amp; Attendance - CampusConnect</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Participants & Attendance - CampusConnect</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
+  <body class="organizer-page organizer-attendance-page">
+    <!-- Navigation Bar -->
     <header>
+      <div class="brand">
+        <img src="../images/logo.png" alt="CampusConnect Logo" class="logo" />
         <h2>CampusConnect</h2>
-        <nav>
-            <a href="organizer-dashboard.html">Dashboard</a> |
-            <a href="manage-events.html">Manage Events</a> |
-            <a href="attendance.html">Participants</a> |
-            <a href="../index.html">Logout</a>
-        </nav>
-        <hr>
+      </div>
+
+      <nav>
+        <a href="organizer-dashboard.html">Dashboard</a> |
+        <a href="manage-events.html">Manage Events</a> |
+        <a href="attendance.html">Participants</a> |
+        <a href="../index.html">Logout</a>
+      </nav>
+
+      <hr />
     </header>
 
     <main>
-        <h1>View Participant &amp; Attendance</h1>
-        <p>View and manage registered participants for this event.</p>
+      <!-- Page Header -->
+      <h1>View Participants & Attendance</h1>
+      <p>View and manage registered participants for this event.</p>
 
-        <section>
-            <label for="eventSelect"><strong>Select Event:</strong></label>
-            <select id="eventSelect">
-                <option>Leadership Seminar (18 November 2026)</option>
-                <option>AI Workshop (21 December 2026)</option>
-            </select>
+      <!-- Select Event -->
+      <section class="attendance-event-info">
+        <label for="eventSelect">
+          <strong>Select Event:</strong>
+        </label>
 
-            <h2>Leadership Seminar</h2>
-            <p>
-                <strong>Date:</strong> 18 November 2026 |
-                <strong>Time:</strong> 10AM - 2PM |
-                <strong>Location:</strong> UiTM Shah Alam |
-                <strong>Total Registered:</strong> 2 / 100
-            </p>
-        </section>
+        <select id="eventSelect" onchange="changeEvent()"></select>
 
-        <div>
-            <button type="button" id="btnAll" onclick="setStatusFilter('ALL')">All Participants (2)</button>
-            <button type="button" id="btnPresent" onclick="setStatusFilter('Present')">Present (1)</button>
-            <button type="button" id="btnAbsent" onclick="setStatusFilter('Absent')">Absent (0)</button>
-        </div>
+        <h2 id="selectedEventTitle"></h2>
 
-        <br>
+        <p id="selectedEventInfo"></p>
+      </section>
 
-        <div>
-            <input type="text" id="searchInput" onkeyup="filterTable()" placeholder="Search participant (name / student ID)...">
-            <select id="statusDropdown" onchange="filterTable()">
-                <option value="ALL">All Attendance Status</option>
-                <option value="Registered">Registered</option>
-                <option value="Present">Present</option>
-                <option value="Absent">Absent</option>
-            </select>
-        </div>
+      <!-- Attendance Overview -->
+      <div class="attendance-tabs">
+        <button type="button" id="btnAll" onclick="setStatusFilter('ALL')">
+          All Participants (0)
+        </button>
 
-        <br>
+        <button
+          type="button"
+          id="btnPresent"
+          onclick="setStatusFilter('Present')"
+        >
+          Present (0)
+        </button>
 
-        <table id="participantTable" border="1" cellpadding="8" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Student ID</th>
-                    <th>Name</th>
-                    <th>Faculty</th>
-                    <th>Register Date</th>
-                    <th>Attendance Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2024661234</td>
-                    <td>AINI SOFEA</td>
-                    <td>FSKM</td>
-                    <td>25/10/2026</td>
-                    <td id="status-1" class="status-cell">Present</td>
-                    <td>
-                        <button type="button" onclick="updateStatus('status-1', 'Present')">Present</button>
-                        <button type="button" onclick="updateStatus('status-1', 'Absent')">Absent</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>202534676</td>
-                    <td>AHMAD AKMAL</td>
-                    <td>FKA</td>
-                    <td>2/11/2026</td>
-                    <td id="status-2" class="status-cell">Registered</td>
-                    <td>
-                        <button type="button" onclick="updateStatus('status-2', 'Present')">Present</button>
-                        <button type="button" onclick="updateStatus('status-2', 'Absent')">Absent</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <button
+          type="button"
+          id="btnAbsent"
+          onclick="setStatusFilter('Absent')"
+        >
+          Absent (0)
+        </button>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="attendance-filters">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search participant (name / student ID)..."
+          onkeyup="filterTable()"
+        />
+
+        <select id="statusDropdown" onchange="filterTable()">
+          <option value="ALL">All Attendance Status</option>
+          <option value="Registered">Registered</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+        </select>
+      </div>
+
+      <!-- Participant Table -->
+      <table id="participantTable" border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Student ID</th>
+            <th>Name</th>
+            <th>Faculty</th>
+            <th>Register Date</th>
+            <th>Attendance Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="participantBody"></tbody>
+      </table>
     </main>
 
     <script>
-        function updateStatus(cellId, newStatus) {
-            document.getElementById(cellId).innerText = newStatus;
-            updateCounters();
-            filterTable();
+      // ==========================================
+      // SAMPLE EVENTS
+      // ==========================================
+
+      var sampleEvents = [
+        {
+          id: "1",
+          title: "Leadership Seminar",
+          date: "2026-11-18",
+          time: "10 AM - 2 PM",
+          location: "UiTM Shah Alam",
+          capacity: 100,
+        },
+        {
+          id: "2",
+          title: "AI Workshop",
+          date: "2026-12-21",
+          time: "9 AM - 12 PM",
+          location: "UiTM Shah Alam",
+          capacity: 80,
+        },
+      ];
+
+      // ==========================================
+      // SAMPLE PARTICIPANTS
+      // ==========================================
+
+      var sampleParticipants = {
+        1: [
+          {
+            studentId: "2024661234",
+            name: "AINI SOFEA",
+            faculty: "FSKM",
+            registerDate: "25/10/2026",
+            status: "Present",
+          },
+          {
+            studentId: "202534676",
+            name: "AHMAD AKMAL",
+            faculty: "FKA",
+            registerDate: "2/11/2026",
+            status: "Registered",
+          },
+        ],
+
+        2: [
+          {
+            studentId: "2026123456",
+            name: "NUR AINA",
+            faculty: "FSKM",
+            registerDate: "10/11/2026",
+            status: "Registered",
+          },
+          {
+            studentId: "2026234567",
+            name: "DANISH HAKIM",
+            faculty: "FSKM",
+            registerDate: "12/11/2026",
+            status: "Registered",
+          },
+        ],
+      };
+
+      // ==========================================
+      // GET EVENTS INCLUDING CREATED EVENTS
+      // ==========================================
+
+      function getAllEvents() {
+        var eventList = sampleEvents.slice();
+
+        var savedEvents = JSON.parse(
+          localStorage.getItem("campusconnect_organizer_events") || "[]",
+        );
+
+        savedEvents.forEach(function (event) {
+          var eventInfo = {
+            id: String(event.id),
+            title: event.title,
+            date: event.date,
+            time: event.time,
+            location: event.location,
+            capacity: event.capacity,
+          };
+
+          var index = eventList.findIndex(function (item) {
+            return item.id == eventInfo.id;
+          });
+
+          if (index >= 0) {
+            eventList[index] = eventInfo;
+          } else {
+            eventList.push(eventInfo);
+          }
+        });
+
+        return eventList;
+      }
+
+      // ==========================================
+      // GET PARTICIPANTS FROM LOCAL STORAGE
+      // ==========================================
+
+      function getParticipants(eventId) {
+        var saved = localStorage.getItem("campusconnect_attendance_" + eventId);
+
+        if (saved != null) {
+          return JSON.parse(saved);
         }
 
-        function setStatusFilter(status) {
-            document.getElementById("statusDropdown").value = status;
-            filterTable();
+        return sampleParticipants[eventId] || [];
+      }
+
+      // ==========================================
+      // FORMAT EVENT DATE
+      // ==========================================
+
+      function formatDate(date) {
+        var parts = date.split("-");
+
+        if (parts.length != 3) {
+          return date;
         }
 
-        function filterTable() {
-            const searchText = document.getElementById("searchInput").value.toUpperCase();
-            const selectedStatus = document.getElementById("statusDropdown").value;
-            const rows = document.querySelectorAll("#participantTable tbody tr");
+        var eventDate = new Date(
+          Number(parts[0]),
+          Number(parts[1]) - 1,
+          Number(parts[2]),
+        );
 
-            rows.forEach(row => {
-                const studentId = row.cells[1].innerText.toUpperCase();
-                const name = row.cells[2].innerText.toUpperCase();
-                const status = row.cells[5].innerText.trim();
+        return eventDate.toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        });
+      }
 
-                const matchesSearch = studentId.includes(searchText) || name.includes(searchText);
-                const matchesStatus = (selectedStatus === "ALL") || (status === selectedStatus);
+      // ==========================================
+      // LOAD EVENT DROPDOWN
+      // ==========================================
 
-                row.style.display = (matchesSearch && matchesStatus) ? "" : "none";
-            });
+      function loadEventOptions() {
+        var eventSelect = document.getElementById("eventSelect");
+
+        var events = getAllEvents();
+
+        eventSelect.innerHTML = "";
+
+        events.forEach(function (event) {
+          var option = document.createElement("option");
+
+          option.value = event.id;
+
+          option.textContent =
+            event.title + " (" + formatDate(event.date) + ")";
+
+          eventSelect.appendChild(option);
+        });
+
+        // Allow selection from Manage Events page
+        var params = new URLSearchParams(window.location.search);
+
+        var selectedId = params.get("id");
+
+        if (selectedId != null) {
+          var exists = events.some(function (event) {
+            return event.id == selectedId;
+          });
+
+          if (exists) {
+            eventSelect.value = selectedId;
+          }
         }
 
-        function updateCounters() {
-            const statuses = Array.from(document.querySelectorAll(".status-cell")).map(td => td.innerText.trim());
-            const total = statuses.length;
-            const presentCount = statuses.filter(s => s === "Present").length;
-            const absentCount = statuses.filter(s => s === "Absent").length;
+        displayAttendance();
+      }
 
-            document.getElementById("btnAll").innerText = `All Participants (${total})`;
-            document.getElementById("btnPresent").innerText = `Present (${presentCount})`;
-            document.getElementById("btnAbsent").innerText = `Absent (${absentCount})`;
+      // ==========================================
+      // CHANGE SELECTED EVENT
+      // ==========================================
+
+      function changeEvent() {
+        document.getElementById("searchInput").value = "";
+
+        document.getElementById("statusDropdown").value = "ALL";
+
+        displayAttendance();
+      }
+
+      // ==========================================
+      // DISPLAY SELECTED EVENT
+      // ==========================================
+
+      function displayAttendance() {
+        var eventId = document.getElementById("eventSelect").value;
+
+        var events = getAllEvents();
+
+        var selectedEvent = events.find(function (event) {
+          return event.id == eventId;
+        });
+
+        if (selectedEvent == null) {
+          return;
         }
+
+        var participants = getParticipants(eventId);
+
+        document.getElementById("selectedEventTitle").textContent =
+          selectedEvent.title;
+
+        document.getElementById("selectedEventInfo").textContent =
+          "Date: " +
+          formatDate(selectedEvent.date) +
+          " | Time: " +
+          selectedEvent.time +
+          " | Location: " +
+          selectedEvent.location +
+          " | Total Registered: " +
+          participants.length +
+          " / " +
+          selectedEvent.capacity;
+
+        updateCounters();
+
+        filterTable();
+      }
+
+      // ==========================================
+      // UPDATE ATTENDANCE STATUS
+      // ==========================================
+
+      function updateStatus(studentId, newStatus) {
+        var eventId = document.getElementById("eventSelect").value;
+
+        var participants = getParticipants(eventId);
+
+        for (var i = 0; i < participants.length; i++) {
+          if (participants[i].studentId == studentId) {
+            participants[i].status = newStatus;
+
+            break;
+          }
+        }
+
+        // Save attendance in browser
+        localStorage.setItem(
+          "campusconnect_attendance_" + eventId,
+          JSON.stringify(participants),
+        );
+
+        displayAttendance();
+      }
+
+      // ==========================================
+      // ATTENDANCE FILTER BUTTONS
+      // ==========================================
+
+      function setStatusFilter(status) {
+        document.getElementById("statusDropdown").value = status;
+
+        filterTable();
+      }
+
+      // ==========================================
+      // SEARCH AND FILTER PARTICIPANTS
+      // ==========================================
+
+      function filterTable() {
+        var eventId = document.getElementById("eventSelect").value;
+
+        var participants = getParticipants(eventId);
+
+        var searchText = document
+          .getElementById("searchInput")
+          .value.toUpperCase()
+          .trim();
+
+        var selectedStatus = document.getElementById("statusDropdown").value;
+
+        var tableBody = document.getElementById("participantBody");
+
+        tableBody.innerHTML = "";
+
+        var count = 0;
+
+        participants.forEach(function (person) {
+          var matchesSearch =
+            person.studentId.toUpperCase().includes(searchText) ||
+            person.name.toUpperCase().includes(searchText);
+
+          var matchesStatus =
+            selectedStatus == "ALL" || person.status == selectedStatus;
+
+          if (matchesSearch && matchesStatus) {
+            count++;
+
+            var row = document.createElement("tr");
+
+            var values = [
+              count,
+              person.studentId,
+              person.name,
+              person.faculty,
+              person.registerDate,
+              person.status,
+            ];
+
+            for (var i = 0; i < values.length; i++) {
+              var cell = document.createElement("td");
+
+              cell.textContent = values[i];
+
+              if (i == 5) {
+                cell.className =
+                  "attendance-status " + person.status.toLowerCase();
+              }
+
+              row.appendChild(cell);
+            }
+
+            // Action buttons
+            var actionCell = document.createElement("td");
+
+            var presentButton = document.createElement("button");
+
+            presentButton.type = "button";
+            presentButton.textContent = "Present";
+            presentButton.className = "present-btn";
+
+            presentButton.onclick = function () {
+              updateStatus(person.studentId, "Present");
+            };
+
+            var absentButton = document.createElement("button");
+
+            absentButton.type = "button";
+            absentButton.textContent = "Absent";
+            absentButton.className = "absent-btn";
+
+            absentButton.onclick = function () {
+              updateStatus(person.studentId, "Absent");
+            };
+
+            actionCell.appendChild(presentButton);
+            actionCell.appendChild(absentButton);
+
+            row.appendChild(actionCell);
+
+            tableBody.appendChild(row);
+          }
+        });
+
+        // Empty result
+        if (count == 0) {
+          var row = document.createElement("tr");
+          var cell = document.createElement("td");
+
+          cell.colSpan = 7;
+          cell.textContent = "No participants found.";
+          cell.style.textAlign = "center";
+
+          row.appendChild(cell);
+          tableBody.appendChild(row);
+        }
+
+        // Highlight active filter
+        document
+          .getElementById("btnAll")
+          .classList.toggle("active", selectedStatus == "ALL");
+
+        document
+          .getElementById("btnPresent")
+          .classList.toggle("active", selectedStatus == "Present");
+
+        document
+          .getElementById("btnAbsent")
+          .classList.toggle("active", selectedStatus == "Absent");
+      }
+
+      // ==========================================
+      // UPDATE ATTENDANCE COUNTERS
+      // ==========================================
+
+      function updateCounters() {
+        var eventId = document.getElementById("eventSelect").value;
+
+        var participants = getParticipants(eventId);
+
+        var presentCount = 0;
+        var absentCount = 0;
+
+        for (var i = 0; i < participants.length; i++) {
+          if (participants[i].status == "Present") {
+            presentCount++;
+          } else if (participants[i].status == "Absent") {
+            absentCount++;
+          }
+        }
+
+        document.getElementById("btnAll").textContent =
+          "All Participants (" + participants.length + ")";
+
+        document.getElementById("btnPresent").textContent =
+          "Present (" + presentCount + ")";
+
+        document.getElementById("btnAbsent").textContent =
+          "Absent (" + absentCount + ")";
+      }
+
+      // Load data when page opens
+      loadEventOptions();
     </script>
-
-</body>
+  </body>
 </html>

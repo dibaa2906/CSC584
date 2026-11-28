@@ -1,80 +1,320 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Event - CampusConnect</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Event - CampusConnect</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
+  <body class="organizer-page organizer-form-page">
+    <!-- Navigation Bar -->
     <header>
+      <div class="brand">
+        <img src="../images/logo.png" alt="CampusConnect Logo" class="logo" />
         <h2>CampusConnect</h2>
-        <nav>
-            <a href="organizer-dashboard.html">Dashboard</a> |
-            <a href="manage-events.html">Manage Events</a> |
-            <a href="attendance.html">Participants</a> |
-            <a href="../index.html">Logout</a>
-        </nav>
-        <hr>
+      </div>
+
+      <nav>
+        <a href="organizer-dashboard.html">Dashboard</a> |
+        <a href="manage-events.html">Manage Events</a> |
+        <a href="attendance.html">Participants</a> |
+        <a href="../index.html">Logout</a>
+      </nav>
+
+      <hr />
     </header>
 
     <main>
-        <h1>Create New Event</h1>
-        <p>Note: All events are free admission. No payment details required.</p>
+      <h1 id="formHeading">Create New Event</h1>
 
-        <form action="manage-events.html" method="get" onsubmit="alert('Event has been created successfully (Demo only).');">
-            <p>
-                <label for="title">Event Title*:</label><br>
-                <input type="text" id="title" name="title" required>
-            </p>
+      <p class="form-note">All campus events are free admission.</p>
 
-            <p>
-                <label for="description">Event Description*:</label><br>
-                <textarea id="description" name="description" rows="4" cols="40" required></textarea>
-            </p>
+      <!-- Event Form -->
+      <form class="event-form" onsubmit="saveEvent(event)">
+        <!-- Event Title -->
+        <p class="full-width">
+          <label for="title">Event Title*:</label>
+          <input type="text" id="title" name="title" required />
+        </p>
 
-            <p>
-                <label for="category">Category*:</label><br>
-                <select id="category" name="category" required>
-                    <option value="">Select Category</option>
-                    <option value="Seminar">Seminar</option>
-                    <option value="Workshop">Workshop</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Cultural">Cultural</option>
-                </select>
-            </p>
+        <!-- Description -->
+        <p class="full-width">
+          <label for="description"> Event Description*: </label>
+          <textarea
+            id="description"
+            name="description"
+            rows="4"
+            required
+          ></textarea>
+        </p>
 
-            <p>
-                <label for="date">Date*:</label><br>
-                <input type="date" id="date" name="date" required>
-            </p>
+        <!-- Category -->
+        <p>
+          <label for="category">Category*:</label>
+          <select id="category" name="category" required>
+            <option value="">Select Category</option>
+            <option value="Seminar">Seminar</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Sports">Sports</option>
+            <option value="Cultural">Cultural</option>
+          </select>
+        </p>
 
-            <p>
-                <label for="time">Time*:</label><br>
-                <input type="time" id="time" name="time" required>
-            </p>
+        <!-- Location -->
+        <p>
+          <label for="location">Location*:</label>
+          <input type="text" id="location" name="location" required />
+        </p>
 
-            <p>
-                <label for="location">Location*:</label><br>
-                <input type="text" id="location" name="location" required>
-            </p>
+        <!-- Event Date -->
+        <p>
+          <label for="date">Event Date*:</label>
+          <input type="date" id="date" name="date" required />
+        </p>
 
-            <p>
-                <label for="capacity">Participant Capacity*:</label><br>
-                <input type="number" id="capacity" name="capacity" min="1" required>
-            </p>
+        <!-- Event Time -->
+        <p>
+          <label for="time">Event Time*:</label>
+          <input type="time" id="time" name="time" required />
+        </p>
 
-            <p>
-                <label for="deadline">Registration Deadline*:</label><br>
-                <input type="date" id="deadline" name="deadline" required>
-            </p>
+        <!-- Capacity -->
+        <p>
+          <label for="capacity"> Participant Capacity*: </label>
+          <input type="number" id="capacity" name="capacity" min="1" required />
+        </p>
 
-            <p>
-                <button type="submit">Create Event</button>
-                <a href="manage-events.html"><button type="button">Cancel</button></a>
-            </p>
-        </form>
+        <!-- Registration Deadline -->
+        <p>
+          <label for="deadline"> Registration Deadline*: </label>
+          <input type="date" id="deadline" name="deadline" required />
+        </p>
+
+        <!-- Action Buttons -->
+        <p class="form-actions">
+          <button type="submit" id="saveButton">Create Event</button>
+
+          <a href="manage-events.html" class="cancel-form-btn"> Cancel </a>
+        </p>
+      </form>
     </main>
 
-</body>
+    <script>
+      // ==========================================
+      // GET EVENT ID FROM URL
+      // ==========================================
+
+      const params = new URLSearchParams(window.location.search);
+
+      const editId = params.get("id");
+
+      // ==========================================
+      // RETRIEVE SAVED EVENTS
+      // ==========================================
+
+      function getSavedEvents() {
+        return JSON.parse(
+          localStorage.getItem("campusconnect_organizer_events") || "[]",
+        );
+      }
+
+      // ==========================================
+      // DEFAULT SAMPLE EVENT DETAILS
+      // ==========================================
+
+      function getSampleEvent(id) {
+        if (id == "1") {
+          return {
+            id: 1,
+            title: "Leadership Seminar",
+            description:
+              "A seminar that helps students develop leadership and communication skills.",
+            category: "Seminar",
+            date: "2026-11-18",
+            time: "10:00",
+            location: "UiTM Shah Alam",
+            capacity: 100,
+            deadline: "2026-11-15",
+            registeredCount: 55,
+          };
+        }
+
+        if (id == "2") {
+          return {
+            id: 2,
+            title: "AI Workshop",
+            description:
+              "A workshop introducing students to artificial intelligence.",
+            category: "Workshop",
+            date: "2026-12-21",
+            time: "09:00",
+            location: "UiTM Shah Alam",
+            capacity: 80,
+            deadline: "2026-12-18",
+            registeredCount: 80,
+          };
+        }
+
+        return null;
+      }
+
+      // ==========================================
+      // LOAD EVENT FOR EDITING
+      // ==========================================
+
+      function loadEvent() {
+        if (editId === null) {
+          return;
+        }
+
+        const savedEvents = getSavedEvents();
+
+        const selectedEvent =
+          savedEvents.find(function (event) {
+            return String(event.id) === editId;
+          }) || getSampleEvent(editId);
+
+        if (selectedEvent === null) {
+          alert("Event not found.");
+          window.location.href = "manage-events.html";
+          return;
+        }
+
+        document.getElementById("formHeading").textContent = "Edit Event";
+
+        document.title = "Edit Event - CampusConnect";
+
+        document.getElementById("saveButton").textContent = "Save Changes";
+
+        document.getElementById("title").value = selectedEvent.title;
+
+        document.getElementById("description").value =
+          selectedEvent.description;
+
+        document.getElementById("category").value = selectedEvent.category;
+
+        document.getElementById("date").value = selectedEvent.date;
+
+        document.getElementById("time").value = selectedEvent.time;
+
+        document.getElementById("location").value = selectedEvent.location;
+
+        document.getElementById("capacity").value = selectedEvent.capacity;
+
+        document.getElementById("deadline").value = selectedEvent.deadline;
+      }
+
+      // ==========================================
+      // CREATE OR UPDATE EVENT
+      // ==========================================
+
+      function saveEvent(event) {
+        event.preventDefault();
+
+        const title = document.getElementById("title").value.trim();
+
+        const description = document.getElementById("description").value.trim();
+
+        const category = document.getElementById("category").value;
+
+        const date = document.getElementById("date").value;
+
+        const time = document.getElementById("time").value;
+
+        const location = document.getElementById("location").value.trim();
+
+        const capacity = Number(document.getElementById("capacity").value);
+
+        const deadline = document.getElementById("deadline").value;
+
+        // Validate registration deadline
+        if (deadline > date) {
+          alert("Registration deadline cannot be after the event date.");
+          return;
+        }
+
+        const savedEvents = getSavedEvents();
+
+        const existingEvent =
+          savedEvents.find(function (item) {
+            return String(item.id) === editId;
+          }) || getSampleEvent(editId);
+
+        // Determine event status
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const eventDate = new Date(date + "T00:00:00");
+
+        let status = "Upcoming";
+
+        if (eventDate < today) {
+          status = "Completed";
+        } else if (eventDate.getTime() === today.getTime()) {
+          status = "Ongoing";
+        }
+
+        let eventId;
+
+        if (editId !== null) {
+          eventId = Number(editId);
+        } else {
+          eventId = Date.now();
+        }
+
+        if (
+          localStorage.getItem("campusconnect_cancelled_" + eventId) === "true"
+        ) {
+          status = "Cancelled";
+        }
+
+        // Create event object
+        const newEvent = {
+          id: eventId,
+          title: title,
+          description: description,
+          category: category,
+          date: date,
+          time: time,
+          location: location,
+          capacity: capacity,
+          deadline: deadline,
+          status: status,
+          registeredCount: existingEvent
+            ? existingEvent.registeredCount || 0
+            : 0,
+        };
+
+        // Check whether event already exists
+        const eventIndex = savedEvents.findIndex(function (item) {
+          return String(item.id) === String(eventId);
+        });
+
+        if (eventIndex >= 0) {
+          savedEvents[eventIndex] = newEvent;
+        } else {
+          savedEvents.push(newEvent);
+        }
+
+        // Save in browser
+        localStorage.setItem(
+          "campusconnect_organizer_events",
+          JSON.stringify(savedEvents),
+        );
+
+        if (editId !== null) {
+          alert("Event updated successfully! (Demo only)");
+        } else {
+          alert("Event created successfully! (Demo only)");
+        }
+
+        // Return to Manage Events
+        window.location.href = "manage-events.html";
+      }
+
+      // Load selected event if editing
+      loadEvent();
+    </script>
+  </body>
 </html>

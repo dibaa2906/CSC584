@@ -1,5 +1,7 @@
 # CSC584
+
 GROUP ASSIGNMENT_SMART CAMPUS EVENT TICKETING SYSTEM
+
 # CSC584 - Enterprise Programming
 
 ## Group Assignment: Campus Event Discovery and Registration System
@@ -15,6 +17,7 @@ The project aims to develop a web-based application that allows UiTM students to
 The system consists of three main actors:
 
 ### 1. Student
+
 - Register and log in
 - Discover, search, and filter events
 - View event details
@@ -24,6 +27,7 @@ The system consists of three main actors:
 - View waitlist status
 
 ### 2. Event Organizer
+
 - Log in
 - Create new events
 - Update and cancel events
@@ -33,6 +37,7 @@ The system consists of three main actors:
 - View organized events
 
 ### 3. System Admin
+
 - Log in
 - Monitor overall system activities
 - Manage user accounts
@@ -56,12 +61,12 @@ The system consists of three main actors:
 
 ## Group Task Distribution
 
-| Member | Responsibility | HTML Files |
-|---|---|---|
-| Member 1 | Student Interface | 4 |
-| Member 2 | Event Organizer Interface | 4 |
-| Member 3 | System Admin + Shared Pages | 5 |
-| **Total** | | **13** |
+| Member    | Responsibility              | HTML Files |
+| --------- | --------------------------- | ---------- |
+| Member 1  | Student Interface           | 4          |
+| Member 2  | Event Organizer Interface   | 4          |
+| Member 3  | System Admin + Shared Pages | 5          |
+| **Total** |                             | **13**     |
 
 ## GitHub Collaboration
 

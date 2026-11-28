@@ -1,84 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Favourite | CampusConnect</title>
-</head>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-<body>
-
+  <body class="student-page student-favourites-page">
     <!-- Navigation Bar -->
     <header>
-        <nav>
-            <table width="100%" cellpadding="10">
-                <tr>
-                    <td width="45%">
-                        <strong>CampusConnect</strong>
-                    </td>
+      <nav>
+        <table width="100%" cellpadding="10">
+          <tr>
+            <td width="45%">
+              <div class="brand">
+                <img
+                  src="../images/logo.png"
+                  alt="CampusConnect Logo"
+                  class="logo"
+                />
+                <strong>CampusConnect</strong>
+              </div>
+            </td>
 
-                    <td align="center">
-                        <a href="events.html">Explore Events</a>
-                    </td>
+            <td align="center">
+              <a href="events.html">Explore Events</a>
+            </td>
 
-                    <td align="center">
-                        <a href="my-favourite.html">My Interest</a>
-                    </td>
+            <td align="center">
+              <a href="my-favourite.html">My Interest</a>
+            </td>
 
-                    <td align="center">
-                        <a href="student-dashboard.html">My Dashboard</a>
-                    </td>
+            <td align="center">
+              <a href="student-dashboard.html">My Dashboard</a>
+            </td>
 
-                    <td align="right">
-                        <a href="index.html" title="Log Out">
-                            👤
-                        </a>
-                    </td>
-                </tr>
-            </table>
-        </nav>
+            <td align="right">
+              <a href="../index.html" title="Log Out">Log Out</a>
+            </td>
+          </tr>
+        </table>
+      </nav>
     </header>
 
     <main>
+      <!-- Favourite Events -->
+      <section id="favourite-events">
+        <h1>My Favourite Events</h1>
+        <p>Events that you have saved</p>
 
-        <!-- Favourite Events -->
-        <section id="favourite-events">
-
-            <h1>My Favourite Events</h1>
-            <p>Events that you have saved</p>
-
-            <div id="favourite-list"></div>
-
-        </section>
-
+        <div id="favourite-list"></div>
+      </section>
     </main>
 
     <script>
+      // Display saved favourite events
+      function displayFavourites() {
+        const favourites = JSON.parse(
+          localStorage.getItem("favouriteEvents") || "[]",
+        );
 
-        // Display saved favourite events
-        function displayFavourites() {
+        const container = document.getElementById("favourite-list");
 
-            const favourites = JSON.parse(
-                localStorage.getItem("favouriteEvents") || "[]"
-            );
+        container.innerHTML = "";
 
-            const container =
-                document.getElementById("favourite-list");
+        if (favourites.length === 0) {
+          container.innerHTML = "<p>No favourite events yet.</p>";
 
-            container.innerHTML = "";
+          return;
+        }
 
-            if (favourites.length === 0) {
-
-                container.innerHTML =
-                    "<p>No favourite events yet.</p>";
-
-                return;
-            }
-
-            favourites.forEach(function (event) {
-
-                container.innerHTML += `
+        favourites.forEach(function (event) {
+          container.innerHTML += `
 
                 <table border="1" width="100%"
                     cellpadding="15" cellspacing="0">
@@ -117,37 +111,25 @@
                 <br>
 
             `;
+        });
+      }
 
-            });
+      // Remove favourite event
+      function removeEvent(eventId) {
+        if (confirm("Are you sure you want to remove this event?")) {
+          let favourites = JSON.parse(
+            localStorage.getItem("favouriteEvents") || "[]",
+          );
+
+          favourites = favourites.filter((event) => event.id !== eventId);
+
+          localStorage.setItem("favouriteEvents", JSON.stringify(favourites));
+
+          displayFavourites();
         }
+      }
 
-        // Remove favourite event
-        function removeEvent(eventId) {
-
-            if (confirm("Are you sure you want to remove this event?")) {
-
-                let favourites = JSON.parse(
-                    localStorage.getItem("favouriteEvents") || "[]"
-                );
-
-                favourites = favourites.filter(
-                    event => event.id !== eventId
-                );
-
-                localStorage.setItem(
-                    "favouriteEvents",
-                    JSON.stringify(favourites)
-                );
-
-                displayFavourites();
-
-            }
-        }
-
-        displayFavourites();
-
+      displayFavourites();
     </script>
-
-</body>
-
+  </body>
 </html>
